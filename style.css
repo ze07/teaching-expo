@@ -1,14 +1,15 @@
-/* Global */
+/* Base & Typography */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background: #f8f9fc;
-  color: #222;
+  background: #f8f9f9;
+  color: #2c2c2c;
+  line-height: 1.6;
 }
 
 /* Container */
@@ -22,7 +23,7 @@ body {
 .navbar {
   background: #ffffff;
   padding: 20px 0;
-  border-bottom: 1px solid #e5e8ec;
+  border-bottom: 2px solid #d4af37;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -37,10 +38,11 @@ body {
 .logo {
   font-size: 28px;
   font-weight: 700;
+  color: #006b3f;
 }
 
 .logo span {
-  color: #4f46e5;
+  color: #c8102e;
 }
 
 .nav-links {
@@ -52,18 +54,18 @@ body {
 .nav-links a {
   text-decoration: none;
   font-weight: 500;
-  color: #444;
+  color: #2c2c2c;
   transition: 0.2s;
 }
 
 .nav-links a:hover {
-  color: #4f46e5;
+  color: #006b3f;
 }
 
 /* Hero */
 .hero {
   height: 75vh;
-  background: linear-gradient(to right, #4f46e5, #6d64ff);
+  background: linear-gradient(to right, #006b3f, #003366);
   color: white;
   display: flex;
   align-items: center;
@@ -71,7 +73,7 @@ body {
 }
 
 .hero-title {
-  font-size: 52px;
+  font-size: 50px;
   font-weight: 700;
 }
 
@@ -84,8 +86,8 @@ body {
 
 .cta-btn {
   padding: 12px 30px;
-  background: white;
-  color: #4f46e5;
+  background: #c8102e;
+  color: white;
   border: none;
   border-radius: 10px;
   font-weight: 600;
@@ -95,7 +97,7 @@ body {
 }
 
 .cta-btn:hover {
-  background: #e6e4ff;
+  background: #a10a24;
 }
 
 /* Sections */
@@ -112,6 +114,7 @@ body {
   font-weight: 700;
   margin-bottom: 40px;
   text-align: center;
+  color: #003366;
 }
 
 /* Grid */
@@ -138,13 +141,13 @@ body {
 .card h3 {
   font-size: 22px;
   font-weight: 600;
-  color: #4f46e5;
+  color: #006b3f;
   margin-bottom: 10px;
 }
 
 .card-btn {
   margin-top: 15px;
-  background: #4f46e5;
+  background: #c8102e;
   color: white;
   padding: 10px 24px;
   border-radius: 8px;
@@ -155,14 +158,15 @@ body {
 }
 
 .card-btn:hover {
-  background: #3d3acb;
+  background: #a10a24;
 }
 
 /* Footer */
 .footer {
   text-align: center;
   padding: 25px;
-  background: #111;
+  background: #003366;
   color: white;
   margin-top: 50px;
+  font-size: 14px;
 }
