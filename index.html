@@ -1,68 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Welcome – Teaching Expo</title>
+
+<style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f4f5ff;
-      text-align: center;
-      padding: 20px;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fafafa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
     }
 
-    .intro-box {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      max-width: 420px;
-      width: 100%;
+    .card {
+        background: white;
+        padding: 40px;
+        width: 90%;
+        max-width: 450px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        border-top: 6px solid #0B3D91; /* UMKB blue */
     }
 
-    .intro-box img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    img.logo {
+        width: 130px;
+        margin-bottom: 20px;
     }
 
-    .enter-btn {
-      background: #4f46e5;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
+    h1 {
+        color: #0B3D91;
+        margin-bottom: 10px;
     }
 
-    .enter-btn:hover {
-      background: #3b38c0;
+    p {
+        color: #333;
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #1c1b33;
+    .btn {
+        margin-top: 25px;
+        padding: 14px 22px;
+        text-decoration: none;
+        background: #E67E22; /* UMKB orange */
+        color: white;
+        border-radius: 10px;
+        font-size: 18px;
+        display: inline-block;
+        transition: 0.3s;
     }
-  </style>
+
+    .btn:hover {
+        background: #cf6d17;
+    }
+
+    .qr {
+        width: 160px;
+        margin-top: 20px;
+        border-radius: 12px;
+    }
+</style>
 </head>
+
 <body>
+    <div class="card">
+        <img class="logo" src="umkb-logo.png" alt="UMKB Logo" />
 
-  <div class="intro-box">
-    <h2>Scan to Access on Mobile</h2>
-    <img src="teaching-expo-qr.png" alt="QR Code">
+        <h1>Teaching Materials Expo</h1>
+        <p>Welcome to the ICT & University 4.0 educational space.</p>
 
-    <button class="enter-btn" onclick="window.location.href='home.html'">
-      Enter Website
-    </button>
-  </div>
+        <a class="btn" href="index.html">Enter Website</a>
 
+        <h3>Quick Access</h3>
+        <img class="qr" src="teaching-expo-qr.png" alt="QR Code" />
+    </div>
 </body>
 </html>
