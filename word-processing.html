@@ -1,174 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Processing | Teaching Expo</title>
-    <link rel="stylesheet" href="style.css"> <!-- assuming your site uses style.css -->
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #222;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #003366; /* Uni of Biskra blue */
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        nav {
-            background-color: #0055a5;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        main {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #003366;
-            margin-top: 40px;
-        }
-        h3 {
-            color: #0055a5;
-            margin-top: 30px;
-        }
-        ul, ol {
-            margin-left: 20px;
-        }
-        footer {
-            background-color: #003366;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 40px;
-        }
-        a.download-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #0055a5;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        a.download-btn:hover {
-            background-color: #003366;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word Processing – Teaching Expo (UMKB)</title>
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6f8fc;
+      color: #2c2c2c;
+      line-height: 1.6;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    header.blog-header {
+      text-align: center;
+      padding: 40px 20px;
+      background: #0B3D91; /* UMKB blue */
+      color: white;
+    }
+    header.blog-header img.logo {
+      height: 60px;
+      margin-bottom: 20px;
+    }
+    header.blog-header h1 {
+      margin-bottom: 10px;
+      font-size: 36px;
+      font-weight: 700;
+    }
+    header.blog-header p.subtitle {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+    section.module {
+      margin-top: 40px;
+    }
+    section.module:nth-child(even) {
+      background: #fafbfe;
+      padding: 30px 20px;
+      border-radius: 8px;
+    }
+    section.module h2 {
+      font-size: 24px;
+      color: #0B3D91;
+      margin-bottom: 10px;
+    }
+    section.module ul {
+      list-style: disc inside;
+      margin-left: 20px;
+    }
+    section.module ul li {
+      margin-bottom: 8px;
+    }
+    .return-btn {
+      text-align: center;
+      margin: 50px 0;
+    }
+    .return-btn a {
+      display: inline-block;
+      padding: 14px 30px;
+      background: #E67E22; /* UMKB orange */
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .return-btn a:hover {
+      background: #c0651a;
+    }
+    footer.blog-footer {
+      text-align: center;
+      padding: 20px;
+      background: #0B3D91;
+      color: white;
+      margin-top: 60px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-<header>
+  <header class="blog-header">
+    <img class="logo" src="umkb-logo.png" alt="UMKB Logo">
     <h1>Word Processing</h1>
-    <p>Comprehensive Guide for ICT Students | English Department</p>
-</header>
+    <p class="subtitle">Full Academic Course – University 4.0 · ICT Toolkit</p>
+  </header>
 
-<nav>
-    <a href="#introduction">Introduction</a>
-    <a href="#text-formatting">Text Formatting</a>
-    <a href="#paragraphs-lists">Paragraphs & Lists</a>
-    <a href="#styles">Styles</a>
-    <a href="#tables">Tables</a>
-    <a href="#templates">Templates</a>
-    <a href="#mail-merge">Mail Merge</a>
-    <a href="#summary">Summary</a>
-</nav>
-
-<main>
-    <section id="introduction">
-        <h2>Introduction</h2>
-        <p>Word processing is an essential tool for office automation. Microsoft Word allows users to create, edit, format, and print documents efficiently. Unlike a typewriter, it allows instant editing and formatting, making documents more readable and professional.</p>
-        <p>Word processing involves creating and structuring content, applying formatting, and managing elements like tables, images, and templates.</p>
+  <div class="container">
+    <section class="module">
+      <h2>Module 1 – Introduction to Word Processing</h2>
+      <p>Word processing is the act of creating, editing and formatting documents using word-processing software. It enables dynamic editing, inserting text, moving sections and printing … :contentReference[oaicite:0]{index=0}</p>
     </section>
 
-    <section id="text-formatting">
-        <h2>Text Formatting</h2>
-        <p>Text formatting controls the appearance of your text. Common features include:</p>
-        <ul>
-            <li>Font family, size, color</li>
-            <li>Bold, Italic, Underline</li>
-            <li>Text effects and highlights</li>
-            <li>Alignment and spacing</li>
-        </ul>
-        <p>Proper formatting improves readability and professional appearance of documents.</p>
+    <section class="module">
+      <h2>Module 2 – Formatting & Academic Writing</h2>
+      <ul>
+        <li>Margins, orientation, and page size</li>
+        <li>Headers & footers, page numbering</li>
+        <li>Line spacing, paragraph alignment</li>
+        <li>Multilevel lists, styles application</li>
+      </ul>
     </section>
 
-    <section id="paragraphs-lists">
-        <h2>Paragraphs and Lists</h2>
-        <p>Each paragraph can be aligned (left, center, right, justified) and spaced for clarity.</p>
-        <p>Lists help organize information:</p>
-        <ul>
-            <li><strong>Bulleted lists:</strong> unordered points</li>
-            <li><strong>Numbered lists:</strong> ordered steps</li>
-        </ul>
+    <section class="module">
+      <h2>Module 3 – Document Design & University 4.0</h2>
+      <ul>
+        <li>Using templates for academic reports</li>
+        <li>Designing documents for smart campus delivery</li>
+        <li>Hyperlinks, embedded media, QR codes</li>
+      </ul>
     </section>
 
-    <section id="styles">
-        <h2>Styles</h2>
-        <p>Word offers predefined styles (Heading 1, Title, Normal) to ensure consistent formatting. Applying a style changes font, size, color, and spacing all at once.</p>
-        <p>Custom styles can also be created to match your preferred document layout.</p>
+    <section class="module">
+      <h2>Module 4 – Editing, Collaboration & Review</h2>
+      <ul>
+        <li>Track Changes, Comments</li>
+        <li>Comparing versions, Proofing tools</li>
+        <li>Preparing for publishing & export to PDF</li>
+      </ul>
     </section>
 
-    <section id="tables">
-        <h2>Working with Tables</h2>
-        <p>Tables organize data in rows and columns. Methods to insert tables include:</p>
-        <ol>
-            <li>Drag the grid to desired size</li>
-            <li>Insert Table dialog to specify rows and columns</li>
-            <li>Draw Table for custom layouts</li>
-        </ol>
-        <p>Tables can be formatted using Table Tools for styles, borders, shading, and merging cells.</p>
-    </section>
+    <div class="return-btn">
+      <a href="index.html">← Return to Courses</a>
+    </div>
+  </div>
 
-    <section id="templates">
-        <h2>Templates and Document Structure</h2>
-        <p>A template is a pre-designed document structure with predefined styles, layouts, and formatting. Using templates saves time and ensures consistency.</p>
-        <p>Start a document from a template via <strong>File → New</strong>, select a template, and replace placeholders with your content. Custom templates can be saved as <strong>.dotx</strong> files for reuse.</p>
-    </section>
-
-    <section id="mail-merge">
-        <h2>Mail Merge</h2>
-        <p>Mail Merge automates personalized documents. It combines a main document (e.g., letter) with a data source (Excel, CSV, Outlook) to generate multiple customized copies.</p>
-        <ol>
-            <li>Start Mail Merge from the Mailings tab</li>
-            <li>Select Recipients (existing file or new list)</li>
-            <li>Insert merge fields where personalized data is needed</li>
-            <li>Preview and Finish to generate all documents</li>
-        </ol>
-        <p>Mail Merge saves time in creating multiple personalized letters or labels.</p>
-    </section>
-
-    <section id="summary">
-        <h2>Summary</h2>
-        <p>Mastering word processing allows ICT students to produce professional, well-structured, and formatted documents. Key skills include text formatting, using tables, templates, styles, and performing mail merge efficiently.</p>
-        <a href="word-processing.pdf" class="download-btn" target="_blank">Download PDF Version</a>
-    </section>
-</main>
-
-<footer>
-    <p>&copy; 2025 Teaching Expo | University of Mohamed Khider Biskra</p>
-</footer>
+  <footer class="blog-footer">
+    © 2025 Teaching Expo – UMKB
+  </footer>
 
 </body>
 </html>
