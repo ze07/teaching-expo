@@ -1,102 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teaching Expo</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Teaching Expo - UMKB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f6f8fc;
+    }
+
+    header {
+        background: #0B3D91; /* UMKB blue */
+        color: white;
+        padding: 18px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+    }
+
+    header img {
+        height: 60px;
+    }
+
+    nav a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    .section {
+        padding: 40px;
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        margin-top: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        border-left: 6px solid #E67E22; /* UMKB orange */
+    }
+
+    h2 {
+        color: #0B3D91;
+        margin-top: 0;
+    }
+
+    ul {
+        line-height: 1.8;
+    }
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-<nav class="navbar">
-  <div class="container nav-flex">
-    <div class="logo">
-      <img src="logo-umkb.png" alt="Université Mohamed Khider Biskra" class="logo-img" />
-      <span>TeachingExpo</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#courses">Courses</a></li>
-      <li><a href="#materials">Materials</a></li>
-      <li><a href="#contact">Contact</a></li>
+<header>
+    <img src="umkb-logo.png" alt="UMKB Logo">
+    <nav>
+        <a href="#ict">ICT Fundamentals</a>
+        <a href="#word">Word Processing</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- ICT FUNDAMENTALS -->
+<div id="ict" class="section">
+    <h2>ICT Fundamentals</h2>
+    <p>A complete introduction to Information and Communication Technology aligned with University 4.0 requirements.</p>
+
+    <h3>Module 1 – Introduction to ICT</h3>
+    <ul>
+        <li>What is ICT?</li>
+        <li>ICT as an enabler of development</li>
+        <li>Data vs Information vs Knowledge</li>
+        <li>Digital communication tools</li>
+        <li>ICT in modern universities</li>
     </ul>
-  </div>
-</nav>
 
+    <h3>Module 2 – ICT & University 4.0</h3>
+    <ul>
+        <li>What is University 4.0?</li>
+        <li>Smart learning & smart pedagogy</li>
+        <li>Digital transformation tools (LMS, cloud platforms)</li>
+        <li>Competencies needed for University 4.0 students</li>
+        <li>Using Office tools for smart education</li>
+    </ul>
 
-  <!-- HERO -->
-  <section id="hero" class="hero">
-    <div class="container hero-content">
-      <h2 class="hero-title">Modern Teaching Materials Platform</h2>
-      <p class="hero-subtitle">
-        A clean and professional hub where students access lessons, exercises,
-        presentations, and ICT resources.
-      </p>
-      <button class="cta-btn">Explore Courses</button>
-    </div>
-  </section>
+    <h3>Module 3 – Digital Literacy & Productivity</h3>
+    <ul>
+        <li>Operating systems</li>
+        <li>File management & good practices</li>
+        <li>Cloud tools</li>
+        <li>Digital communication</li>
+    </ul>
 
-  <!-- COURSES -->
-  <section id="courses" class="section">
-    <div class="container">
-      <h2 class="section-title">Available Courses</h2>
+    <h3>Module 4 – Microsoft Office Suite</h3>
+    <ul>
+        <li>Word: academic writing, formatting</li>
+        <li>Excel: data, formulas, charts</li>
+        <li>PowerPoint: academic presentations</li>
+    </ul>
+</div>
 
-      <div class="grid">
-        <div class="card">
-          <h3>ICT Fundamentals</h3>
-          <p>Introduction to digital systems, software tools, and Office Suite.</p>
-          <button class="card-btn">Open</button>
-        </div>
+<!-- WORD PROCESSING -->
+<div id="word" class="section">
+    <h2>Word Processing</h2>
+    <p>Full academic and administrative Word course with professional workshops.</p>
 
-        <div class="card">
-          <h3>Excel for Students</h3>
-          <p>Learn formulas, tables, charts, and data manipulation.</p>
-          <button class="card-btn">Open</button>
-        </div>
+    <h3>Module 1 – Introduction to Word</h3>
+    <ul>
+        <li>Ribbon overview (French: Accueil, Insertion…)</li>
+        <li>Creating and saving documents</li>
+        <li>Export tools</li>
+    </ul>
 
-        <div class="card">
-          <h3>Word Processing</h3>
-          <p>Formatting, academic writing, editing, and document design.</p>
-          <button class="card-btn">Open</button>
-        </div>
-      </div>
-    </div>
-  </section>
+    <h3>Module 2 – Formatting</h3>
+    <ul>
+        <li>Margins, orientation, spacing</li>
+        <li>Headers & footers</li>
+        <li>Page numbering</li>
+        <li>Lists & multilevel lists</li>
+    </ul>
 
-  <!-- MATERIALS -->
-  <section id="materials" class="section alt-section">
-    <div class="container">
-      <h2 class="section-title">Teaching Materials</h2>
+    <h3>Module 3 – Academic Writing</h3>
+    <ul>
+        <li>Styles</li>
+        <li>TOC</li>
+        <li>Citations & bibliography</li>
+        <li>Footnotes & captions</li>
+    </ul>
 
-      <div class="grid">
-        <div class="card">
-          <h3>PDF Lessons</h3>
-          <p>Download summaries, chapters, and exercises.</p>
-          <button class="card-btn">Download</button>
-        </div>
+    <h3>Module 4 – Workshops</h3>
+    <ul>
+        <li>Academic report formatting (1h30)</li>
+        <li>Professional workshop invitation</li>
+        <li>Reviewing: Track Changes</li>
+        <li>University 4.0 digital document creation</li>
+    </ul>
+</div>
 
-        <div class="card">
-          <h3>PowerPoints</h3>
-          <p>Slides used during lectures and labs.</p>
-          <button class="card-btn">Download</button>
-        </div>
+<!-- CONTACT -->
+<div id="contact" class="section">
+    <h2>Contact</h2>
+    <p>For more information or course access, contact your instructor.</p>
+</div>
 
-        <div class="card">
-          <h3>Assignments</h3>
-          <p>Weekly homework and practice material.</p>
-          <button class="card-btn">Download</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="contact" class="footer">
-    <p>© 2025 TeachingExpo — All rights reserved.</p>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
