@@ -1,58 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Teaching Materials Expo</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching Expo</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-<header>
-  <h1>Teaching Materials Expo</h1>
-  <nav>
-    <a href="#courses">Courses</a>
-    <a href="#resources">Resources</a>
-    <a href="#contact">Contact</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <h1 class="logo">Teaching<span>Expo</span></h1>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
   </nav>
-</header>
 
-<section class="hero">
-  <h2>Welcome to Your Teaching Materials Library</h2>
-  <p>Organize, present, and share your teaching content professionally.</p>
-</section>
-
-<section id="courses" class="section">
-  <h2>Courses</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>ICT Basics</h3>
-      <p>Introduction course for university students.</p>
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="container hero-content">
+      <h2 class="hero-title">Modern Teaching Materials Platform</h2>
+      <p class="hero-subtitle">
+        A clean and professional hub where students access lessons, exercises,
+        presentations, and ICT resources.
+      </p>
+      <button class="cta-btn">Explore Courses</button>
     </div>
-    <div class="card">
-      <h3>Excel Workshop</h3>
-      <p>Step-by-step materials and exercises.</p>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses" class="section">
+    <div class="container">
+      <h2 class="section-title">Available Courses</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>ICT Fundamentals</h3>
+          <p>Introduction to digital systems, software tools, and Office Suite.</p>
+          <button class="card-btn">Open</button>
+        </div>
+
+        <div class="card">
+          <h3>Excel for Students</h3>
+          <p>Learn formulas, tables, charts, and data manipulation.</p>
+          <button class="card-btn">Open</button>
+        </div>
+
+        <div class="card">
+          <h3>Word Processing</h3>
+          <p>Formatting, academic writing, editing, and document design.</p>
+          <button class="card-btn">Open</button>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Machine Learning Prep</h3>
-      <p>Theory, exercises, and solved exams.</p>
+  </section>
+
+  <!-- MATERIALS -->
+  <section id="materials" class="section alt-section">
+    <div class="container">
+      <h2 class="section-title">Teaching Materials</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>PDF Lessons</h3>
+          <p>Download summaries, chapters, and exercises.</p>
+          <button class="card-btn">Download</button>
+        </div>
+
+        <div class="card">
+          <h3>PowerPoints</h3>
+          <p>Slides used during lectures and labs.</p>
+          <button class="card-btn">Download</button>
+        </div>
+
+        <div class="card">
+          <h3>Assignments</h3>
+          <p>Weekly homework and practice material.</p>
+          <button class="card-btn">Download</button>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="resources" class="section">
-  <h2>Resources</h2>
-  <ul>
-    <li>PDF lessons</li>
-    <li>Presentations</li>
-    <li>Practice exams</li>
-    <li>Teaching labs</li>
-  </ul>
-</section>
+  <!-- FOOTER -->
+  <footer id="contact" class="footer">
+    <p>© 2025 TeachingExpo — All rights reserved.</p>
+  </footer>
 
-<footer id="contact">
-  <p>Contact: zineb.teaching@domain.com</p>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
