@@ -44,14 +44,6 @@ body {
 .logo span {
   color: #c8102e;
 }
-.logo-img {
-  height: 40px;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-.logo span {
-  vertical-align: middle;
-}
 
 .nav-links {
   list-style: none;
