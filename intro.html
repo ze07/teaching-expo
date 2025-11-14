@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f5ff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .intro-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .intro-box img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .enter-btn {
+      background: #4f46e5;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .enter-btn:hover {
+      background: #3b38c0;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1c1b33;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro-box">
+    <h2>Scan to Access on Mobile</h2>
+    <img src="teaching-expo-qr.png" alt="QR Code">
+
+    <button class="enter-btn" onclick="window.location.href='index.html'">
+      Enter Website
+    </button>
+  </div>
+
+</body>
+</html>
