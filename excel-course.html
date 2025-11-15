@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Excel Course – Teaching Expo (UMKB)</title>
-
-  <style> 
+  <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,7 +14,6 @@
       line-height: 1.7;
     }
 
-    /* Header */
     header {
       background: linear-gradient(to right, #006b3f, #003366);
       padding: 60px 20px;
@@ -38,40 +37,51 @@
       opacity: 0.9;
     }
 
-    /* Container */
     .container {
       width: 90%;
       max-width: 1000px;
       margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
-    /* Section titles */
-    h2 {
+    .section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .section h2 {
       color: #0B3D91;
-      margin-top: 50px;
+      margin-bottom: 16px;
       font-size: 28px;
       border-left: 5px solid #E67E22;
       padding-left: 12px;
     }
 
-    h3 {
+    .section h3 {
       color: #006b3f;
-      margin-top: 25px;
+      margin-top: 20px;
       font-size: 22px;
     }
 
-    ul {
-      margin-left: 20px;
-      line-height: 1.8;
+    .section p,
+    .section ul {
+      margin-left: 12px;
+      margin-top: 12px;
+    }
+
+    .section img {
+      display: block;
+      max-width: 100%;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .return-btn {
       text-align: center;
-      margin-top: 60px;
+      margin: 60px 0;
     }
 
     .return-btn a {
@@ -94,145 +104,121 @@
       padding: 20px;
       background: #003366;
       color: white;
-      margin-top: 50px;
       font-size: 14px;
+      margin-top: 40px;
     }
   </style>
 </head>
 
 <body>
-
-  <!-- HERO HEADER -->
   <header>
     <img src="logo-umkb.png" class="logo" alt="UMKB Logo" />
     <h1>Excel Course</h1>
-    <p>ICT Fundamentals – Practical Excel Training for L1 English Students</p>
+    <p>Excel Fundamentals — Professional Training for L1 English Students</p>
   </header>
 
-  <!-- MAIN CONTENT -->
   <div class="container">
+    <!-- Introduction Section -->
+    <div class="section">
+      <h2>What Is Excel?</h2>
+      <p>Excel is a powerful spreadsheet program developed by Microsoft. It helps users organize data in rows and columns, make calculations, create charts, and analyze data. :contentReference[oaicite:1]{index=1}</p>
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250106173425946154/Microsoft-Excel-Tutorial-2025-Updated.pdf" alt="Excel Tutorial PDF Cover">
+      <p>Whether you're managing budgets, analyzing data, or building reports, Excel offers the tools to do it efficiently. :contentReference[oaicite:2]{index=2}</p>
+    </div>
 
-    <h2>1. Introduction to Excel</h2>
-    <p>Excel is a spreadsheet software used to organize data, perform calculations, create charts, and analyze information. Workbooks contain worksheets made of rows, columns, and cells.</p>
+    <!-- Interface Section -->
+    <div class="section">
+      <h2>Excel Interface Overview</h2>
+      <h3>Ribbon, Formula Bar & Worksheet</h3>
+      <p>The ribbon organizes Excel’s tools into tabs such as Home, Insert, Formulas and Data. The formula bar shows the content of the selected cell, and the worksheet grid is where you work with rows and columns. :contentReference[oaicite:3]{index=3}</p>
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/2025/07/excel1Worksheet-1.png" alt="Excel Worksheet Interface">
+      <p>The status bar at the bottom displays information like sum or average for selected cells. :contentReference[oaicite:4]{index=4}</p>
+    </div>
 
-    <h3>Interface Overview</h3>
-    <ul>
-      <li>Ribbon: Home, Insert, Page Layout, Formulas…</li>
-      <li>Formula Bar: shows the content of the selected cell</li>
-      <li>Worksheet Grid: rows × columns</li>
-      <li>Sheets Tabs: Sheet1, Sheet2…</li>
-    </ul>
+    <!-- Workbooks & Worksheets -->
+    <div class="section">
+      <h2>Workbooks & Worksheets</h2>
+      <p>An Excel workbook (.xlsx) is one file that can contain multiple worksheets. A worksheet has a huge number of rows and columns — specifically more than 1,048,576 rows and 16,384 columns. :contentReference[oaicite:5]{index=5}</p>
+      <ul>
+        <li>Rename a sheet: double-click the sheet tab.</li>
+        <li>Add a new sheet: click the “+” icon.</li>
+        <li>Copy sheet: hold <strong>CTRL</strong> + drag tab.</li>
+        <li>Delete a sheet: right-click → Delete.</li>
+      </ul>
+    </div>
 
-    <h2>2. Worksheets, Rows, Columns, and Cells</h2>
-    <h3>Worksheets</h3>
-    <p>A worksheet contains more than 1 million rows and 16,000 columns.</p>
+    <!-- Data Entry -->
+    <div class="section">
+      <h2>Entering & Managing Data</h2>
+      <h3>Selecting Cells</h3>
+      <ul>
+        <li>Select one cell: click it</li>
+        <li>Select entire row: click row number</li>
+        <li>Select column: click letter heading</li>
+        <li>Select range: click + drag</li>
+        <li>Select all: <strong>CTRL + A</strong></li>
+      </ul>
 
-    <h3>Cells</h3>
-    <p>A cell contains text, numbers, dates, or formulas. Identified by column + row (example: A1).</p>
+      <h3>Data Entry Types</h3>
+      <ul>
+        <li>Text (labels)</li>
+        <li>Numbers (for calculation)</li>
+        <li>Dates (Excel recognizes them and can compute with them)</li>
+      </ul>
 
-    <h3>Cell Pointer</h3>
-    <ul>
-      <li>Arrow → select</li>
-      <li>White cross → highlight</li>
-      <li>Black cross → fill handle</li>
-      <li>Double arrow → resize columns/rows</li>
-    </ul>
+      <h3>AutoFill & Flash Fill</h3>
+      <p>Excel’s AutoFill allows you to drag to copy patterns (dates, sequence). Flash Fill can automatically complete structured data by detecting patterns. :contentReference[oaicite:6]{index=6}</p>
+    </div>
 
-    <h2>3. Working with Workbooks</h2>
-    <ul>
-      <li>Create new workbook: CTRL + N</li>
-      <li>Rename sheet: double-click the sheet name</li>
-      <li>Add sheet: + icon</li>
-      <li>Copy sheet: hold CTRL + drag</li>
-      <li>Delete: right-click → Delete</li>
-    </ul>
+    <!-- Formatting & Conditional Formatting -->
+    <div class="section">
+      <h2>Formatting & Data Visualization</h2>
+      <p>You can enhance readability and interpretation using:</p>
+      <ul>
+        <li>Cell formatting: fonts, borders, alignment</li>
+        <li>Conditional Formatting: color cells based on values (like red for low values) :contentReference[oaicite:7]{index=7}</li>
+        <li>Data Bars, Icon Sets, and Color Scales</li>
+      </ul>
+    </div>
 
-    <h2>4. Selecting and Entering Data</h2>
-    <h3>Selecting data</h3>
-    <ul>
-      <li>Cell: click</li>
-      <li>Row: click row number</li>
-      <li>Column: click column letter</li>
-      <li>Range: click + drag</li>
-      <li>Whole sheet: CTRL + A</li>
-    </ul>
+    <!-- Formulas and Functions -->
+    <div class="section">
+      <h2>Formulas & Functions</h2>
+      <h3>Using Formulas</h3>
+      <p>A formula always begins with <strong>=</strong>. Example: <code>=A1 + B1</code>. Excel supports operators: +, -, *, /.</p>
 
-    <h3>Entering values</h3>
-    <ul>
-      <li>Text: type and press Enter</li>
-      <li>Numbers: used in calculations</li>
-      <li>Dates: formatted automatically</li>
-    </ul>
+      <h3>AutoSum</h3>
+      <p>Quickly sum a row or column by selecting a cell, clicking the Σ (AutoSum) button, then pressing Enter.</p>
+    </div>
 
-    <h2>5. Formulas and Functions</h2>
-    <h3>Basic Operators</h3>
-    <ul>
-      <li>Addition: =A1 + B1</li>
-      <li>Subtraction: =A1 - B1</li>
-      <li>Multiplication: =A1 * B1</li>
-      <li>Division: =A1 / B1</li>
-    </ul>
-
-    <h3>AutoSum</h3>
-    <p>Click the result cell → AutoSum (Σ) → Enter.</p>
-
-    <h2>6. Managing Rows and Columns</h2>
-    <ul>
-      <li>Resize: drag borders</li>
-      <li>AutoFit: double-click border</li>
-      <li>Insert: right-click → Insert</li>
-      <li>Delete: right-click → Delete</li>
-      <li>Hide/Unhide: right-click options</li>
-    </ul>
-
-    <h2>7. Freeze Panes</h2>
-    <ul>
-      <li>Freeze Top Row</li>
-      <li>Freeze First Column</li>
-      <li>Freeze Panes (custom)</li>
-    </ul>
-
-    <h2>8. Page Layout and Printing</h2>
-    <ul>
-      <li>File → Print → Preview</li>
-      <li>Page Orientation</li>
-      <li>Margins, Scaling</li>
-      <li>Headers and Footers</li>
-    </ul>
-
-    <h2>9. Practical Lab – TP1</h2>
-    <h3>Step 1: Create Workbook</h3>
-    <ul>
-      <li>Create new file → name it "TP Excel"</li>
-      <li>Rename sheets: TP1, TP2, TP3</li>
-      <li>Create new sheet TP4</li>
-    </ul>
-
-    <h3>Step 2: Create 5×5 Table</h3>
-    <ul>
-      <li>Select cells</li>
-      <li>Or Insert → Table</li>
-    </ul>
-
-    <h3>Step 3: Formatting</h3>
-    <ul>
-      <li>Insert row/column</li>
-      <li>Delete row/column</li>
-      <li>Apply colors</li>
-    </ul>
-
-    <h3>Step 4: Final Task</h3>
-    <p>Recreate the model table as shown in TP instructions (teacher will provide screenshot/model).</p>
+    <!-- Practical Lab -->
+    <div class="section">
+      <h2>Practical Lab – TP1</h2>
+      <h3>Step 1: Create Workbook</h3>
+      <ul>
+        <li>Create a new Excel file → name it <em>TP Excel</em></li>
+        <li>Rename sheets: TP1, TP2, TP3</li>
+        <li>Add a sheet: TP4</li>
+      </ul>
+      <h3>Step 2: Create 5×5 Table</h3>
+      <p>Use Insert → Table or drag to select 5 rows × 5 columns.</p>
+      <h3>Step 3: Manipulate Table</h3>
+      <ul>
+        <li>Add or remove rows/columns</li>
+        <li>Apply color to headers or background</li>
+      </ul>
+      <h3>Step 4: Final Task</h3>
+      <p>Create a formatted table based on teacher-provided model: structure, style, and cell colours.</p>
+    </div>
 
     <div class="return-btn">
       <a href="home.html">← Back to Courses</a>
     </div>
-
   </div>
 
   <footer>
     © 2025 Teaching Expo — Excel Course · UMKB
   </footer>
-
 </body>
+
 </html>
