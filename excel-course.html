@@ -107,6 +107,36 @@
       font-size: 14px;
       margin-top: 40px;
     }
+    .formula-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.formula-table th,
+.formula-table td {
+  border: 1px solid #dcdcdc;
+  padding: 10px;
+  text-align: left;
+}
+
+.formula-table th {
+  background: #0B3D91;
+  color: white;
+  font-weight: 600;
+}
+
+.formula-table tr:nth-child(even) {
+  background: #f4f6fa;
+}
+
+.formula-table td code {
+  background: #f1f1f1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+}
+
   </style>
 </head>
 
@@ -227,14 +257,81 @@
 
 
     <!-- Formulas and Functions -->
-    <div class="section">
-      <h2>Formulas & Functions</h2>
-      <h3>Using Formulas</h3>
-      <p>A formula always begins with <strong>=</strong>. Example: <code>=A1 + B1</code>. Excel supports operators: +, -, *, /.</p>
+   <div class="section">
+  <h2>Formulas & Functions</h2>
 
-      <h3>AutoSum</h3>
-      <p>Quickly sum a row or column by selecting a cell, clicking the Σ (AutoSum) button, then pressing Enter.</p>
-    </div>
+  <h3>Using Formulas</h3>
+  <p>A formula in Excel always begins with <strong>=</strong>. It allows you to perform calculations, manipulate text, or compute values dynamically. For example: <code>=A1 + B1</code>.</p>
+
+  <h3>Operators in Excel</h3>
+  <table class="formula-table">
+    <thead>
+      <tr>
+        <th>Operation</th>
+        <th>Symbol</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Addition</td>
+        <td>+</td>
+        <td>=A1 + B1</td>
+      </tr>
+      <tr>
+        <td>Subtraction</td>
+        <td>-</td>
+        <td>=A1 - B1</td>
+      </tr>
+      <tr>
+        <td>Multiplication</td>
+        <td>*</td>
+        <td>=A1 * B1</td>
+      </tr>
+      <tr>
+        <td>Division</td>
+        <td>/</td>
+        <td>=A1 / B1</td>
+      </tr>
+      <tr>
+        <td>Exponentiation</td>
+        <td>^</td>
+        <td>=A1 ^ 2</td>
+      </tr>
+      <tr>
+        <td>Percentages</td>
+        <td>%</td>
+        <td>=A1 * 10%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>AutoSum Function</h3>
+  <p>The <strong>AutoSum (Σ)</strong> feature allows you to quickly sum up a column or row of numbers:</p>
+  <ol>
+    <li>Select the cell where you want the total.</li>
+    <li>Click on the <strong>AutoSum (Σ)</strong> icon in the Ribbon.</li>
+    <li>Press <strong>Enter</strong> to insert the sum formula automatically.</li>
+  </ol>
+
+  <h3>Other Essential Functions</h3>
+  <ul>
+    <li><strong><code>SUM(range)</code></strong>: Adds all the numbers in a range (e.g., <code>=SUM(A1:A10)</code>).</li>
+    <li><strong><code>AVERAGE(range)</code></strong>: Computes the average of values in the range (e.g., <code>=AVERAGE(B1:B10)</code>).</li>
+    <li><strong><code>MIN(range), MAX(range)</code></strong>: Return the smallest and largest values in a range, respectively.</li>
+    <li><strong><code>COUNT(range)</code></strong>: Counts how many cells in the range contain numbers.</li>
+    <li><strong><code>IF(condition, value_if_true, value_if_false)</code></strong>: Returns one value if a condition is met and another if not (e.g., <code>=IF(A1>10, \"High\", \"Low\")</code>).</li>
+  </ul>
+
+  <h3>Tips for Mastering Formulas</h3>
+  <ul>
+    <li>Always start with <code>=</code> when writing a formula.</li>
+    <li>Use parentheses <code>( )</code> to control the order of operations.</li>
+    <li>Use named ranges for clarity: → Formula → Define Name → use the name in your formulas.</li>
+    <li>Avoid hardcoding numbers inside formulas when possible; keep them in cells.</li>
+    <li>Document complex formulas by adding comments or using a “Helper” sheet.</li>
+  </ul>
+</div>
 
     <!-- Practical Lab -->
     <div class="section">
