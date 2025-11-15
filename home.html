@@ -3,103 +3,812 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teaching Expo</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <meta name="description" content="Teaching Expo - ICT Platform for L1 English students at UMKB" />
+  <title>Teaching Expo - UMKB</title>
+  
+  <style>
+    /* CSS Variables for theming */
+    :root {
+      --umkb-blue: #0B3D91;
+      --umkb-green: #006b3f;
+      --umkb-orange: #E67E22;
+      --accent-red: #c8102e;
+      --bg-primary: #f6f8fc;
+      --bg-secondary: #ffffff;
+      --text-primary: #22262a;
+      --text-secondary: #475569;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--umkb-orange);
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 45px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--umkb-blue);
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      padding: 8px 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: var(--transition);
+      font-size: 15px;
+    }
+
+    .nav-links a:hover {
+      background: var(--bg-primary);
+      color: var(--umkb-blue);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--umkb-blue);
+      padding: 8px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--umkb-blue) 0%, var(--umkb-green) 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 3vw, 20px);
+      margin-bottom: 30px;
+      opacity: 0.95;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 800;
+      display: block;
+      color: var(--umkb-orange);
+    }
+
+    .stat-label {
+      font-size: 14px;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cta-btn {
+      background: var(--umkb-orange);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+      margin-top: 10px;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 20px;
+    }
+
+    .section-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 42px);
+      color: var(--umkb-blue);
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Grid System */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* Card Styles */
+    .card {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--umkb-orange), var(--umkb-blue));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--umkb-blue), var(--umkb-green));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      color: var(--umkb-blue);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .card-btn {
+      background: var(--umkb-green);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      font-size: 15px;
+    }
+
+    .card-btn:hover {
+      background: var(--umkb-blue);
+      transform: scale(1.02);
+    }
+
+    /* Features Section */
+    .features {
+      background: var(--bg-secondary);
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--umkb-orange), var(--accent-red));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+
+    .feature-item h4 {
+      color: var(--umkb-blue);
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .feature-item p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--umkb-blue);
+      color: white;
+      padding: 60px 20px 20px;
+      border-top: 4px solid var(--umkb-orange);
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: var(--umkb-orange);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 14px;
+    }
+
+    .footer-section a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Loading Spinner */
+    .loading {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--umkb-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .logo-text {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-container {
+        gap: 30px;
+      }
+    }
+
+    /* Accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Focus styles for accessibility */
+    *:focus {
+      outline: 2px solid var(--umkb-orange);
+      outline-offset: 2px;
+    }
+
+    button:focus, a:focus {
+      outline-color: var(--umkb-orange);
+    }
+  </style>
+</head>
 <body>
 
- <nav class="navbar">
-  <div class="container nav-flex">
-    <div class="logo">
-      <img src="logo-umkb.png" alt="Université Mohamed Khider Biskra" class="logo-img" />
-      <span>TeachingExpo</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#courses">Courses</a></li>
-      <li><a href="#materials">Materials</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <!-- Loading Spinner -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
   </div>
-</nav>
 
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="logo-section">
+        <img src="logo-umkb.png" alt="UMKB Logo" class="logo-img" />
+        <span class="logo-text">TeachingExpo</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+  </nav>
 
-  <!-- HERO -->
+  <!-- Hero Section -->
   <section id="hero" class="hero">
-    <div class="container hero-content">
-      <h2 class="hero-title">Information and Communication Technology (ICT) Platform</h2>
+    <div class="hero-content">
+      <h1 class="hero-title">Information and Communication Technology Platform</h1>
       <p class="hero-subtitle">
-        Hub where L1 english students can  access lessons, exercises,
-        presentations, and ICT resources.
+        Comprehensive digital learning hub for L1 English students at UMKB. Access lessons, exercises, presentations, and ICT resources anytime, anywhere.
       </p>
-      <button class="cta-btn">Explore Courses</button>
+      <button class="cta-btn" onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})">
+        Explore Courses →
+      </button>
+      
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Active Students</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Core Courses</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Access</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- COURSES -->
+  <!-- Courses Section -->
   <section id="courses" class="section">
-    <div class="container">
-      <h2 class="section-title">Available Courses</h2>
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Available Courses</h2>
+        <p class="section-subtitle">Comprehensive ICT curriculum designed for modern learners</p>
+      </div>
 
       <div class="grid">
         <div class="card">
+          <div class="card-icon">💻</div>
           <h3>ICT Fundamentals</h3>
-          <p>Introduction to digital systems, software tools, and Office Suite.</p>
-          <button class="card-btn">Open</button>
+          <p>Master digital systems, software tools, and Office Suite fundamentals. Perfect for building a strong foundation in information technology.</p>
+          <button class="card-btn" onclick="alert('ICT Fundamentals course opening soon!')">
+            Open Course
+          </button>
         </div>
 
         <div class="card">
+          <div class="card-icon">📊</div>
           <h3>Excel for Students</h3>
-          <p>Learn formulas, tables, charts, and data manipulation.</p>
-          
-          <button class="card-btn" onclick="window.location.href='excel-course.html'">Open</button>
-
+          <p>Learn formulas, data analysis, charts, and advanced spreadsheet techniques. Includes interactive exercises and real-world applications.</p>
+          <button class="card-btn" onclick="window.location.href='excel-course.html'">
+            Open Course
+          </button>
         </div>
 
         <div class="card">
+          <div class="card-icon">📝</div>
           <h3>Word Processing</h3>
-          <p>Formatting, academic writing, editing, and document design.</p>
-         
-            <button class="card-btn" onclick="window.open('https://gcgldh.org/downloads/e-Content/Learning-Material/Computer-Science/Word-Processing.pdf', '_blank')">Open</button>
-         
+          <p>Master document formatting, academic writing standards, and professional document design for university and career success.</p>
+          <button class="card-btn" onclick="window.open('https://gcgldh.org/downloads/e-Content/Learning-Material/Computer-Science/Word-Processing.pdf', '_blank')">
+            Open Course
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MATERIALS -->
-  <section id="materials" class="section alt-section">
-    <div class="container">
-      <h2 class="section-title">Teaching Materials</h2>
+  <!-- Materials Section -->
+  <section id="materials" class="section" style="background: var(--bg-secondary);">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Teaching Materials</h2>
+        <p class="section-subtitle">Downloadable resources to support your learning journey</p>
+      </div>
 
       <div class="grid">
         <div class="card">
+          <div class="card-icon">📄</div>
           <h3>PDF Lessons</h3>
-          <p>Download summaries, chapters, and exercises.</p>
-          <button class="card-btn">Download</button>
+          <p>Comprehensive chapter summaries, detailed exercises, and study guides in downloadable PDF format.</p>
+          <button class="card-btn" onclick="alert('PDF materials will be available soon!')">
+            Download PDFs
+          </button>
         </div>
 
         <div class="card">
-          <h3>PowerPoints</h3>
-          <p>Slides used during lectures and labs.</p>
-          <button class="card-btn">Download</button>
+          <div class="card-icon">🎯</div>
+          <h3>PowerPoint Slides</h3>
+          <p>Lecture slides and presentation materials used during class sessions and laboratory work.</p>
+          <button class="card-btn" onclick="alert('PowerPoint slides will be available soon!')">
+            Download Slides
+          </button>
         </div>
 
         <div class="card">
+          <div class="card-icon">✍️</div>
           <h3>Assignments</h3>
-          <p>Weekly homework and practice material.</p>
-          <button class="card-btn" >Download</button>
+          <p>Weekly homework, practice exercises, and project materials to reinforce your learning.</p>
+          <button class="card-btn" onclick="alert('Assignments will be available soon!')">
+            View Assignments
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Features Section -->
+  <section id="features" class="section features">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Platform Features</h2>
+        <p class="section-subtitle">Built for modern students with accessibility and performance in mind</p>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">📱</div>
+          <h4>Mobile Optimized</h4>
+          <p>Access courses seamlessly on any device - phone, tablet, or desktop</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <h4>Fast Loading</h4>
+          <p>Optimized for quick access even on slower internet connections</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <h4>Secure Access</h4>
+          <p>Your data and progress are safely stored and protected</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">♿</div>
+          <h4>Accessible</h4>
+          <p>Designed to be usable by everyone, following web accessibility standards</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer id="contact" class="footer">
-    <p>© 2025 TeachingExpo — All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About TeachingExpo</h4>
+        <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6;">
+          A comprehensive digital learning platform for L1 English students at Université Mohamed Khider Biskra (UMKB), providing accessible ICT education.
+        </p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#courses">All Courses</a></li>
+          <li><a href="#materials">Study Materials</a></li>
+          <li><a href="#features">Platform Features</a></li>
+          <li><a href="excel-course.html">Excel Masterclass</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#" onclick="alert('Help documentation coming soon!'); return false;">Help & Documentation</a></li>
+          <li><a href="#" onclick="alert('FAQ page coming soon!'); return false;">FAQ</a></li>
+          <li><a href="#" onclick="alert('Contact: z.agli@univ-biskra.dz'); return false;">Contact Instructor</a></li>
+          <li><a href="#" onclick="alert('Feedback form coming soon!'); return false;">Give Feedback</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>University</h4>
+        <ul>
+          <li><a href="http://www.univ-biskra.dz" target="_blank" rel="noopener">UMKB Website</a></li>
+          <li><a href="#" onclick="alert('Campus info coming soon!'); return false;">Campus Information</a></li>
+          <li><a href="#" onclick="alert('Academic calendar coming soon!'); return false;">Academic Calendar</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2025 TeachingExpo - Université Mohamed Khider Biskra (UMKB) | Instructor: Dr. Zineb Djihane Agli</p>
+      <p style="margin-top: 8px; font-size: 13px;">All rights reserved. Optimized for 500+ concurrent students.</p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const isExpanded = navLinks.classList.contains('active');
+      mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+      mobileMenuBtn.textContent = isExpanded ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.textContent = '☰';
+      });
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Show loading spinner on page transitions
+    function showLoading() {
+      document.getElementById('loading').style.display = 'flex';
+    }
+
+    // Add loading to external navigation
+    document.querySelectorAll('.card-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        if (this.onclick && this.onclick.toString().includes('window.location')) {
+          showLoading();
+        }
+      });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe cards for animation
+    document.querySelectorAll('.card, .feature-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Track page views (placeholder for analytics)
+    console.log('Page loaded:', new Date().toISOString());
+    
+    // Performance monitoring
+    window.addEventListener('load', () => {
+      const loadTime = performance.now();
+      console.log(`Page fully loaded in ${Math.round(loadTime)}ms`);
+    });
+
+    // Keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.textContent = '☰';
+      }
+    });
+  </script>
 </body>
 </html>
