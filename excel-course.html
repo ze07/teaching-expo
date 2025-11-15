@@ -1,366 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Excel Course – Teaching Expo (UMKB)</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f6f8fc;
-      color: #2c2c2c;
-      line-height: 1.7;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Excel — Masterclass · Teaching Expo (UMKB)</title>
 
-    header {
-      background: linear-gradient(to right, #006b3f, #003366);
-      padding: 60px 20px;
-      text-align: center;
-      color: white;
-    }
+<!-- Styles: UMKB palette, responsive, print-friendly -->
+<style>
+  :root{
+    --umkb-blue:#0B3D91;
+    --umkb-green:#006b3f;
+    --umkb-orange:#E67E22;
+    --accent-red:#c8102e;
+    --bg:#f6f8fc;
+    --text:#22262a;
+    --card:#ffffff;
+  }
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.6;
+    padding-bottom:80px;
+  }
 
-    header .logo {
-      height: 80px;
-      margin-bottom: 20px;
-    }
+  /* Top hero */
+  .hero{
+    background:linear-gradient(90deg,var(--umkb-green),var(--umkb-blue));
+    color:white;
+    padding:48px 20px;
+    text-align:center;
+  }
+  .hero .logo{
+    height:72px;
+    display:block;
+    margin:0 auto 12px;
+  }
+  .hero h1{font-size:34px;margin:6px 0 8px;font-weight:700}
+  .hero p{opacity:.95;margin:0 auto;max-width:900px}
 
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
+  /* Layout: sticky toc + content */
+  .wrap{
+    display:grid;
+    grid-template-columns: 280px 1fr;
+    gap:28px;
+    width:90%;
+    max-width:1200px;
+    margin:28px auto;
+  }
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr;padding:0 12px}
+    .toc{position:static;order: -1}
+  }
 
-    header p {
-      font-size: 18px;
-      opacity: 0.9;
-    }
+  /* TOC */
+  .toc{
+    position:sticky;
+    top:18px;
+    height:calc(100vh - 36px);
+    overflow:auto;
+    padding:18px;
+    background:var(--card);
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(10,20,40,0.06);
+    border-left:6px solid var(--umkb-orange);
+  }
+  .toc h3{margin:0 0 8px;color:var(--umkb-blue); font-size:16px}
+  .toc ul{list-style:none;padding:0;margin:0}
+  .toc li{margin:10px 0}
+  .toc a{color:var(--umkb-green);text-decoration:none;font-weight:600}
+  .toc a:hover{text-decoration:underline}
 
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: 40px auto;
-    }
+  /* Content */
+  .content{padding:8px 0}
+  .card{
+    background:var(--card);
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 6px 20px rgba(12,18,40,0.04);
+    margin-bottom:20px;
+    border-left:6px solid var(--umkb-orange);
+  }
+  h2{color:var(--umkb-blue);margin:0 0 12px;font-size:22px}
+  h3{color:var(--umkb-green);margin:18px 0 10px;font-size:18px}
+  p, ul{margin:8px 0}
+  ul{padding-left:20px}
 
-    .section {
-      background: white;
-      padding: 30px;
-      margin-bottom: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
+  /* Collapsible */
+  .module-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  .toggle-btn{
+    background:transparent;border:1px solid rgba(0,0,0,0.06);
+    padding:8px 12px;border-radius:8px;
+    cursor:pointer;font-weight:600;color:var(--umkb-blue);
+    transition:.15s;
+  }
+  .toggle-btn:hover{transform:translateY(-2px)}
+  .module-body{margin-top:12px;display:block}
+  .module-body.collapsed{display:none}
 
-    .section h2 {
-      color: #0B3D91;
-      margin-bottom: 16px;
-      font-size: 28px;
-      border-left: 5px solid #E67E22;
-      padding-left: 12px;
-    }
+  /* Formula table */
+  .formula-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px}
+  .formula-table th,.formula-table td{border:1px solid #e6e9ef;padding:10px;text-align:left}
+  .formula-table th{background:var(--umkb-blue);color:white;font-weight:600}
+  .formula-table tr:nth-child(even){background:#fbfcfe}
 
-    .section h3 {
-      color: #006b3f;
-      margin-top: 20px;
-      font-size: 22px;
-    }
+  /* Interactive tester */
+  .tester{
+    display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap
+  }
+  .input{
+    flex:1;min-width:220px;padding:10px 12px;border-radius:8px;border:1px solid #d7dbe6;font-size:15px
+  }
+  .btn{
+    background:var(--umkb-green);color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:700;
+  }
+  .btn.secondary{background:var(--umkb-blue)}
+  .result{
+    margin-top:12px;padding:12px;border-radius:8px;background:#f3f7ff;border-left:4px solid var(--umkb-blue);
+    font-weight:700;color:var(--umkb-blue)
+  }
 
-    .section p,
-    .section ul {
-      margin-left: 12px;
-      margin-top: 12px;
-    }
+  /* Code / example blocks */
+  pre.code{
+    background:#0f1724;color:#f8fafc;padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace;font-size:13px;margin-top:10px
+  }
+  .example{
+    display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:10px
+  }
+  .copy-btn{background:#eef2ff;border:1px solid #dbe4ff;color:var(--umkb-blue);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600}
+  .copy-btn:active{transform:translateY(1px)}
 
-    .section img {
-      display: block;
-      max-width: 100%;
-      margin: 20px auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+  /* small spreadsheet preview */
+  .sheet{
+    width:100%;border-collapse:collapse;margin-top:12px;font-size:14px
+  }
+  .sheet th,.sheet td{border:1px solid #e3e6ee;padding:8px;text-align:left;background:white}
+  .sheet th{background:#f4f7ff;color:var(--umkb-blue);font-weight:700}
+  .sheet tr:nth-child(even) td{background:#fbfcfe}
 
-    .return-btn {
-      text-align: center;
-      margin: 60px 0;
-    }
+  /* footer */
+  footer{padding:20px;text-align:center;background:var(--umkb-blue);color:white;border-top:4px solid var(--umkb-orange);margin-top:28px}
 
-    .return-btn a {
-      padding: 14px 30px;
-      background: #c8102e;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 18px;
-      transition: 0.2s;
-    }
-
-    .return-btn a:hover {
-      background: #a10a24;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #003366;
-      color: white;
-      font-size: 14px;
-      margin-top: 40px;
-    }
-    .formula-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 16px;
-}
-
-.formula-table th,
-.formula-table td {
-  border: 1px solid #dcdcdc;
-  padding: 10px;
-  text-align: left;
-}
-
-.formula-table th {
-  background: #0B3D91;
-  color: white;
-  font-weight: 600;
-}
-
-.formula-table tr:nth-child(even) {
-  background: #f4f6fa;
-}
-
-.formula-table td code {
-  background: #f1f1f1;
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-family: Consolas, monospace;
-}
-
-  </style>
+  /* print friendly */
+  @media print{
+    .toc, .toggle-btn, .copy-btn, .tester .btn{display:none}
+    body{background:white}
+    .wrap{grid-template-columns:1fr}
+  }
+</style>
 </head>
 
 <body>
-  <header>
-    <img src="logo-umkb.png" class="logo" alt="UMKB Logo" />
-    <h1>Excel Course</h1>
-    <p>Excel Fundamentals — Professional Training for L1 English Students</p>
-  </header>
 
-  <div class="container">
-    <!-- Introduction Section -->
-    <div class="section">
-      <h2>What Is Excel?</h2>
-      <p>Excel is a powerful spreadsheet program developed by Microsoft. It helps users organize data in rows and columns, make calculations, create charts, and analyze data.</p>
-      <p>Whether you're managing budgets, analyzing data, or building reports, Excel offers the tools to do it efficiently.</p>
-    </div>
+<!-- HERO -->
+<section class="hero" role="banner" aria-label="Excel masterclass">
+  <img src="logo-umkb.png" alt="UMKB logo" class="logo" />
+  <h1>Excel — Masterclass</h1>
+  <p><strong>Instructor:</strong> Dr. Zineb Agli — advanced practical course covering interface, formulas, formatting, and labs. This page offers interactive learning and professor-level guidance.</p>
+</section>
 
-    <!-- Interface Section -->
-    <div class="section">
-      <h2>Excel Interface Overview</h2>
-      <h3>Ribbon, Formula Bar & Worksheet</h3>
-      <p>🔹 Ribbon 
-        The Ribbon is the large toolbar at the top of Excel. It contains tabs such as Home, Insert, Page Layout, Formulas, Data, and more. Each tab organizes tools into groups (Clipboard, Font, Alignment, Number, Styles…).</p>
-       <p> 🔹 Quick Access Toolbar 
-        A small customizable toolbar at the very top-left of Excel. It contains quick shortcuts like: Save, Undo, Redo, Customize More Commands…</p>
-       <p> 🔹 Worksheet Area
-        This is the large grid where you enter and work with your data. Columns are labeled with letters (A, B, C…) Rows are numbered (1, 2, 3…) Cells are identified by their column + row (e.g., A1, B2)</p>
-      <p>  🔹 Formula Bar
-        Located above the worksheet grid. It displays the exact content of the selected cell: text, numbers, formulas (like =A1+B1), functions (like =SUM(A1:A5)) Whenever you click a cell, the Formula Bar updates.</p>
-      <p>🔹 Status Bar
-        Found at the bottom of Excel. It shows real-time information about your selection, such as: Average, Count, Sum, Zoom level, View options (Normal, Page Layout).</p>
-      <p> <img src="exceltabs.png" alt="Excel Interface"></p>
+<!-- MAIN LAYOUT -->
+<div class="wrap" role="main">
 
-    </div>
+  <!-- TABLE OF CONTENTS -->
+  <aside class="toc" aria-label="Table of contents">
+    <h3>Course contents</h3>
+    <ul>
+      <li><a href="#intro">Introduction & Interface</a></li>
+      <li><a href="#workbooks">Workbooks & Worksheets</a></li>
+      <li><a href="#data">Entering & Managing Data</a></li>
+      <li><a href="#formatting">Formatting & Visualization</a></li>
+      <li><a href="#formulas">Formulas & Functions</a></li>
+      <li><a href="#lab">Practical Lab (TP1)</a></li>
+      <li><a href="#formula-tester">Try a formula</a></li>
+      <li><a href="#resources">Resources & Tips</a></li>
+    </ul>
 
-    <!-- Workbooks & Worksheets -->
-    <div class="section">
-      <h2>Workbooks & Worksheets</h2>
-      <p>An Excel workbook (.xlsx) is one file that can contain multiple worksheets. A worksheet has a huge number of rows and columns — specifically <ul><li>more than 1,048,576 rows </li> <li>and 16,384 columns. </li> <li>More than 17 billion cells</li><p>Each workbook can contain up to 255 worksheets.</p></p>
-      <ul>
-        <li>Rename a sheet: double-click the sheet tab.</li>
-        <li>Add a new sheet: click the “+” icon.</li>
-        <li>Copy sheet: hold <strong>CTRL</strong> + drag tab.</li>
-        <li>Delete a sheet: right-click → Delete.</li>
-      </ul>
-    </div>
+    <hr style="margin:14px 0;border:none;border-top:1px solid #eef2f8">
 
-    <!-- Data Entry -->
-    <div class="section">
-      <h2>Entering & Managing Data</h2>
-      <h3>Selecting Cells</h3>
-      <ul>
-        <li>Select one cell: click it</li>
-        <li>Select entire row: click row number</li>
-        <li>Select column: click letter heading</li>
-        <li>Select range: click + drag</li>
-        <li>Select all: <strong>CTRL + A</strong></li>
-      </ul>
+    <h3>Quick links</h3>
+    <ul>
+      <li><a href="excel-course.html">Original course page</a></li>
+      <li><a href="home.html">Back to Courses</a></li>
+    </ul>
+  </aside>
 
-      <h3>Data Entry Types</h3>
-      <ul>
-        <li>Text (labels)</li>
-        <li>Numbers (for calculation)</li>
-        <li>Dates (Excel recognizes them and can compute with them)</li>
-      </ul>
+  <!-- CONTENT -->
+  <div class="content">
 
-      <h3>AutoFill & Flash Fill</h3>
-      <p>Excel’s AutoFill allows you to drag to copy patterns (dates, sequence). Flash Fill can automatically complete structured data by detecting patterns.</p>
-    </div>
+    <!-- Introduction -->
+    <section id="intro" class="card" aria-labelledby="h-intro">
+      <div class="module-header">
+        <div>
+          <h2 id="h-intro">Introduction & Interface</h2>
+          <p style="margin-top:6px;color:#475569">Opening Excel reveals a rich interface. Focus on the Ribbon, Quick Access, Formula bar and Status bar — these are your daily tools.</p>
+        </div>
+        <button class="toggle-btn" data-target="m-intro">Collapse</button>
+      </div>
 
-    <!-- Formatting & Conditional Formatting -->
-   <div class="section">
-  <h2>Formatting & Data Visualization in Excel</h2>
+      <div id="m-intro" class="module-body">
+        <h3>Key elements (quick guide)</h3>
+        <ul>
+          <li><strong>Ribbon:</strong> Tabs like Home, Insert, Data — grouped tools for formatting, formulas and charts. Hover to see tooltips.</li>
+          <li><strong>Quick Access Toolbar:</strong> Small shortcuts (Save, Undo). Customize for commands you use daily.</li>
+          <li><strong>Worksheet grid:</strong> Columns (A, B, C…), Rows (1, 2, 3…) — cells are referenced as A1, B2.</li>
+          <li><strong>Formula Bar:</strong> Displays/edit the exact content of the selected cell (text, number or formula).</li>
+          <li><strong>Status Bar:</strong> Shows quick calculations (Sum, Average) for the selected range and display options.</li>
+        </ul>
 
-  <h3>Types of Data Formatting</h3>
-  <ul>
-    <li><strong>Number Formatting</strong>: Control how numbers appear — as currency, percentage, decimal places, or even custom units like millions. </li>
-    <li><strong>Text Formatting</strong>: Adjust font type, size, color, bold/italic, or underline to emphasize labels or headers.</li>
-    <li><strong>Date & Time Formatting</strong>: Display dates and times in different styles (e.g., “dd-mmm-yyyy”, “hh:mm AM/PM”) for clarity. </li>
-  </ul>
+        <h3>Professor note</h3>
+        <p><em>Always check the formula bar when evaluating student answers: what is visible in the cell may be formatted; the formula bar reveals the true stored value.</em></p>
 
-  <h3>Conditional Formatting</h3>
-  <p>Conditional formatting lets you apply visual rules to cells based on their values: </p>
-  <ul>
-    <li><strong>Highlight Cell Rules</strong>: Format cells that meet a condition — e.g. greater than a number, less than, between, or text contains. </li>
-    <li><strong>Top/Bottom Rules</strong>: Automatically highlight top or bottom values or percentiles in your data. </li>
-    <li><strong>Conditional Formatting with Formulas</strong>: Use custom formulas (e.g. `=$B2="Sales"`) to set rules for formatting.</li>
-    <li><strong>Color Scales</strong>: Use 2- or 3-color gradients for cells to show relative value ranges.</li>
-    <li><strong>Data Bars</strong>: Fill cells with bars proportional to the cell value to visualize magnitude.</li>
-    <li><strong>Icon Sets</strong>: Use icons (arrows, flags, check marks) to represent value categories. </li>
-  </ul>
+        <!-- small visual sheet -->
+        <table class="sheet" role="table" aria-label="Example sheet">
+          <thead>
+            <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>1</th><td>Item</td><td>Qty</td><td>Unit price</td><td>Total</td></tr>
+            <tr><th>2</th><td>Notebook</td><td>3</td><td>6.50</td><td>=B2*C2</td></tr>
+            <tr><th>3</th><td>Pen</td><td>10</td><td>0.75</td><td>=B3*C3</td></tr>
+            <tr><th>4</th><td><strong>Grand total</strong></td><td></td><td></td><td>=SUM(D2:D3)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <h3>Cell Styles, Themes & Custom Formats</h3>
-  <ul>
-    <li><strong>Cell Styles & Themes</strong>: Apply consistent formatting using built-in styles (Heading, Calculation) or theme colors.</li>
-    <li><strong>Custom Number Formats</strong>: Create specific formats (e.g., negative numbers in red, custom text + numbers) by editing the format code.</li>
-    <li><strong>Borders & Fill</strong>: Use borders and fill colors to organize your data visually.</li>
-    <li><strong>Table Formatting</strong>: Convert your range to a Table (Insert → Table) for automatic design, filtering, and formatting. </li>
-  </ul>
+    <!-- Workbooks -->
+    <section id="workbooks" class="card" aria-labelledby="h-workbooks">
+      <div class="module-header">
+        <div><h2 id="h-workbooks">Workbooks & Worksheets</h2><p style="margin-top:6px">Concepts and best practices for managing multiple sheets and larger projects.</p></div>
+        <button class="toggle-btn" data-target="m-workbooks">Collapse</button>
+      </div>
 
-  <h3>Visualizing Data with Charts and Sparklines</h3>
-  <p>Excel’s **Data Visualization** tools make raw data visually meaningful: </p>
-  <ul>
-    <li><strong>Charts</strong>: Insert charts (column, line, pie, etc.) through the **Insert** tab to represent data graphically.</li>
-    <li><strong>Sparklines</strong>: Add small in-cell charts (line, column, win/loss) using **Insert → Sparklines** to show trends compactly.</li>
-    <li><strong>Formatting Your Charts</strong>: Customize chart area, titles, labels, and axis through the **Design** and **Format** tab. </li>
-  </ul>
+      <div id="m-workbooks" class="module-body">
+        <h3>Advanced practices</h3>
+        <ul>
+          <li><strong>Organize by purpose:</strong> raw data, working calculations, presentation sheets.</li>
+          <li><strong>Use an index sheet:</strong> list sheets and provide links — improves navigation for students.</li>
+          <li><strong>Sheet protection:</strong> lock formulas before sharing with students to prevent accidental edits.</li>
+          <li><strong>Versioning:</strong> keep archived copies like <em>grades_v1.xlsx</em> to track changes.</li>
+        </ul>
 
-  <h3>Best Practices for Effective Formatting</h3>
-  <ul>
-    <li>Use high-contrast colors and accessible formatting rules. </li>
-    <li>Limit too many conditional formats in large datasets to keep performance smooth.</li>
-    <li>Use themes and consistent styles to make workbooks uniform and professional.</li>
-    <li>When copying data, use **Paste Values** and reapply formatting for consistency.</li>
-  </ul>
-</div>
+        <h3>Professor tip</h3>
+        <p>Teach students to separate data from analysis—this reduces errors and simplifies auditing.</p>
+      </div>
+    </section>
 
+    <!-- Data -->
+    <section id="data" class="card" aria-labelledby="h-data">
+      <div class="module-header">
+        <div><h2 id="h-data">Entering & Managing Data</h2><p style="margin-top:6px">Good data hygiene is the foundation of reliable analysis.</p></div>
+        <button class="toggle-btn" data-target="m-data">Collapse</button>
+      </div>
 
-    <!-- Formulas and Functions -->
-   <div class="section">
-  <h2>Formulas & Functions</h2>
+      <div id="m-data" class="module-body">
+        <h3>Selecting & Entry</h3>
+        <ul>
+          <li>Prefer structured ranges and Tables (Insert → Table) — named tables improve formulas.</li>
+          <li>Use Data Validation to enforce correct inputs (lists, date ranges, numeric limits).</li>
+          <li>Flash Fill for repeated structured patterns (use sparingly; teach correctness first).</li>
+        </ul>
 
-  <h3>Using Formulas</h3>
-  <p>A formula in Excel always begins with <strong>=</strong>. It allows you to perform calculations, manipulate text, or compute values dynamically. For example: <code>=A1 + B1</code>.</p>
+        <h3>Data cleaning workflow</h3>
+        <ol>
+          <li>Keep an original raw tab.</li>
+          <li>Make a cleaned copy (remove blanks, trim spaces).</li>
+          <li>Normalize formats (dates, text case).</li>
+          <li>Document assumptions in a README sheet.</li>
+        </ol>
+      </div>
+    </section>
 
-  <h3>Operators in Excel</h3>
-  <table class="formula-table">
-    <thead>
-      <tr>
-        <th>Operation</th>
-        <th>Symbol</th>
-        <th>Example</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Addition</td>
-        <td>+</td>
-        <td>=A1 + B1</td>
-      </tr>
-      <tr>
-        <td>Subtraction</td>
-        <td>-</td>
-        <td>=A1 - B1</td>
-      </tr>
-      <tr>
-        <td>Multiplication</td>
-        <td>*</td>
-        <td>=A1 * B1</td>
-      </tr>
-      <tr>
-        <td>Division</td>
-        <td>/</td>
-        <td>=A1 / B1</td>
-      </tr>
-      <tr>
-        <td>Exponentiation</td>
-        <td>^</td>
-        <td>=A1 ^ 2</td>
-      </tr>
-      <tr>
-        <td>Percentages</td>
-        <td>%</td>
-        <td>=A1 * 10%</td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Formatting -->
+    <section id="formatting" class="card" aria-labelledby="h-formatting">
+      <div class="module-header">
+        <div><h2 id="h-formatting">Formatting & Data Visualization</h2><p style="margin-top:6px">Turn numbers into insights with careful formatting and charts.</p></div>
+        <button class="toggle-btn" data-target="m-formatting">Collapse</button>
+      </div>
 
-  <h3>AutoSum Function</h3>
-  <p>The <strong>AutoSum (Σ)</strong> feature allows you to quickly sum up a column or row of numbers:</p>
-  <ol>
-    <li>Select the cell where you want the total.</li>
-    <li>Click on the <strong>AutoSum (Σ)</strong> icon in the Ribbon.</li>
-    <li>Press <strong>Enter</strong> to insert the sum formula automatically.</li>
-  </ol>
+      <div id="m-formatting" class="module-body">
+        <h3>Key techniques</h3>
+        <ul>
+          <li><strong>Number formats:</strong> currency, percentage, accounting, or custom formats (e.g., 0.0,"M" for millions).</li>
+          <li><strong>Conditional formatting:</strong> color scales, data bars, icon sets — excellent for quick visual triage.</li>
+          <li><strong>Tables:</strong> enable filters, structured references and banded rows for readability.</li>
+        </ul>
 
-  <h3>Other Essential Functions</h3>
-  <ul>
-    <li><strong><code>SUM(range)</code></strong>: Adds all the numbers in a range (e.g., <code>=SUM(A1:A10)</code>).</li>
-    <li><strong><code>AVERAGE(range)</code></strong>: Computes the average of values in the range (e.g., <code>=AVERAGE(B1:B10)</code>).</li>
-    <li><strong><code>MIN(range), MAX(range)</code></strong>: Return the smallest and largest values in a range, respectively.</li>
-    <li><strong><code>COUNT(range)</code></strong>: Counts how many cells in the range contain numbers.</li>
-    <li><strong><code>IF(condition, value_if_true, value_if_false)</code></strong>: Returns one value if a condition is met and another if not (e.g., <code>=IF(A1>10, \"High\", \"Low\")</code>).</li>
-  </ul>
+        <h3>Charts & sparklines</h3>
+        <p>Use charts to show trends (line), composition (stacked column), or comparison (column). Add sparklines for compact trend indicators next to rows.</p>
 
-  <h3>Tips for Mastering Formulas</h3>
-  <ul>
-    <li>Always start with <code>=</code> when writing a formula.</li>
-    <li>Use parentheses <code>( )</code> to control the order of operations.</li>
-    <li>Use named ranges for clarity: → Formula → Define Name → use the name in your formulas.</li>
-    <li>Avoid hardcoding numbers inside formulas when possible; keep them in cells.</li>
-    <li>Document complex formulas by adding comments or using a “Helper” sheet.</li>
-  </ul>
-</div>
+        <h3>Professor note</h3>
+        <p>Prioritise clarity: choose colors for accessibility; annotate charts with source and calculation notes.</p>
+      </div>
+    </section>
 
-    <!-- Practical Lab -->
-    <div class="section">
-      <h2>Practical Lab – TP1</h2>
-      <h3>Step 1: Create Workbook</h3>
-      <ul>
-        <li>Create a new Excel file → name it <em>TP Excel</em></li>
-        <li>Rename sheets: TP1, TP2, TP3</li>
-        <li>Add a sheet: TP4</li>
-      </ul>
-      <h3>Step 2: Create 5×5 Table</h3>
-      <p>Use Insert → Table or drag to select 5 rows × 5 columns.</p>
-      <h3>Step 3: Manipulate Table</h3>
-      <ul>
-        <li>Add or remove rows/columns</li>
-        <li>Apply color to headers or background</li>
-      </ul>
-      <h3>Step 4: Final Task</h3>
-      <p>Create a formatted table based on teacher-provided model: structure, style, and cell colours.</p>
-    </div>
+    <!-- Formulas -->
+    <section id="formulas" class="card" aria-labelledby="h-formulas">
+      <div class="module-header">
+        <div><h2 id="h-formulas">Formulas & Functions — Mastering Excel Formulas</h2>
+          <p style="margin-top:6px">Reference table and advanced guidance for common operations.</p></div>
+        <button class="toggle-btn" data-target="m-formulas">Collapse</button>
+      </div>
 
-    <div class="return-btn">
-      <a href="home.html">← Back to Courses</a>
+      <div id="m-formulas" class="module-body">
+        <h3>Operators & Examples</h3>
+        <table class="formula-table" role="table" aria-label="Operators table">
+          <thead>
+            <tr><th>Operation</th><th>Symbol</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Addition</td><td>+</td><td><code>=A1 + B1</code></td></tr>
+            <tr><td>Subtraction</td><td>-</td><td><code>=A1 - B1</code></td></tr>
+            <tr><td>Multiplication</td><td>*</td><td><code>=A1 * B1</code></td></tr>
+            <tr><td>Division</td><td>/</td><td><code>=A1 / B1</code></td></tr>
+            <tr><td>Exponent</td><td>^</td><td><code>=A1 ^ 2</code></td></tr>
+            <tr><td>Percentage</td><td>%</td><td><code>=A1 * 10%</code></td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top:14px">Essential functions (with professor notes)</h3>
+        <ul>
+          <li><strong>SUM(range)</strong>: <code>=SUM(A1:A10)</code> — use for totals; avoid nested SUMs when unnecessary.</li>
+          <li><strong>AVERAGE(range)</strong>: useful for central tendency; check for outliers first.</li>
+          <li><strong>MIN / MAX</strong>: quick range checks.</li>
+          <li><strong>COUNT / COUNTA</strong>: counts of numeric entries vs non-empty cells.</li>
+          <li><strong>IF / IFS</strong>: conditional logic. Prefer IFS for multiple conditions in modern Excel.</li>
+          <li><strong>VLOOKUP / INDEX+MATCH / XLOOKUP</strong>: teach INDEX+MATCH or XLOOKUP (where available) — they are reliable for two-way lookups.</li>
+          <li><strong>TEXT / DATE functions</strong>: TEXT(), DATE(), YEAR(), MONTH() — essential for data normalization.</li>
+        </ul>
+
+        <h3>Mastering tips</h3>
+        <ul>
+          <li>Use parentheses to make order of operations explicit.</li>
+          <li>Use named ranges and structured table references for clarity and maintainability.</li>
+          <li>Build complex formulas in steps using helper columns for readability and debugging.</li>
+          <li>Document your logic in a comment or a help sheet for other readers.</li>
+        </ul>
+
+        <div style="margin-top:12px">
+          <div class="example">
+            <div><strong>Example:</strong> calculate tax — <code>=B2 * 0.17</code></div>
+            <button class="copy-btn" data-copy="=B2 * 0.17">Copy</button>
+          </div>
+
+          <pre class="code" aria-hidden="true"><code>
+=IF(SUM(B2:B10)>1000, "Bonus", "No bonus")
+=INDEX(A2:A10, MATCH(E2, B2:B10, 0))
+          </code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Formula tester -->
+    <section id="formula-tester" class="card" aria-labelledby="h-tester">
+      <div class="module-header">
+        <div><h2 id="h-tester">Interactive Formula Tester</h2><p style="margin-top:6px">Quickly evaluate simple arithmetic or percent expressions to understand Excel results.</p></div>
+        <button class="toggle-btn" data-target="m-tester">Collapse</button>
+      </div>
+
+      <div id="m-tester" class="module-body">
+        <label for="expr"><strong>Enter expression</strong> (allowed: digits, + - * / ^ ( ) and %):</label>
+        <div class="tester">
+          <input id="expr" class="input" placeholder="Example: (100 + 50) * 10% + 20" aria-label="Expression input">
+          <button id="run" class="btn">Evaluate</button>
+          <button id="clear" class="btn secondary">Clear</button>
+        </div>
+        <div id="res" class="result" aria-live="polite" style="display:none"></div>
+
+        <p style="margin-top:10px;color:#475569">Professor note: this lightweight tester is for arithmetic experimentation. Use Excel for true function parity (dates, text functions, lookup behavior).</p>
+      </div>
+    </section>
+
+    <!-- Practical lab -->
+    <section id="lab" class="card" aria-labelledby="h-lab">
+      <div class="module-header">
+        <div><h2 id="h-lab">Practical Lab — TP1</h2><p style="margin-top:6px">Hands-on steps and evaluation criteria.</p></div>
+        <button class="toggle-btn" data-target="m-lab">Collapse</button>
+      </div>
+
+      <div id="m-lab" class="module-body">
+        <h3>Task</h3>
+        <ol>
+          <li>Create workbook named <em>TP Excel</em> with sheets: TP1, TP2, TP3, TP4.</li>
+          <li>On <strong>TP1</strong> create a 5×5 table with headers: Item, Qty, Unit price, Discount%, Net price.</li>
+          <li>Apply formatting: currency for prices, percentage for discount, conditional formatting for Net price &lt; 5.</li>
+          <li>Calculate totals using SUM, create a chart showing item vs net price.</li>
+        </ol>
+
+        <h3>Evaluation Rubric</h3>
+        <ul>
+          <li>Correct formulas and use of functions — 40%</li>
+          <li>Formatting & visualization quality — 30%</li>
+          <li>Data validation & robustness — 20%</li>
+          <li>Documentation & comments — 10%</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section id="resources" class="card" aria-labelledby="h-resources">
+      <div class="module-header">
+        <div><h2 id="h-resources">Resources & Further Reading</h2><p style="margin-top:6px">Selected readings, cheatsheets and online references.</p></div>
+        <button class="toggle-btn" data-target="m-resources">Collapse</button>
+      </div>
+
+      <div id="m-resources" class="module-body">
+        <ul>
+          <li><a href="https://www.geeksforgeeks.org/excel/introduction-to-ms-excel/" target="_blank" rel="noopener">GeeksforGeeks — Introduction to MS Excel</a></li>
+          <li><a href="https://support.microsoft.com/excel" target="_blank" rel="noopener">Microsoft Office Support — Excel</a></li>
+          <li><a href="#" id="download-tp">Download TP1 worksheet (placeholder)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- back -->
+    <div style="text-align:center;margin:20px 0 60px">
+      <a href="home.html" class="btn" style="text-decoration:none">← Back to Courses</a>
     </div>
   </div>
+</div>
 
-  <footer>
-    © 2025 Teaching Expo — Excel Course · UMKB
-  </footer>
+<footer>
+  © 2025 Teaching Expo — Excel Masterclass · UMKB — Instructor: Dr. Zineb Agli
+</footer>
+
+<!-- INTERACTIVITY -->
+<script>
+  // Collapsible modules & TOC highlighting
+  document.querySelectorAll('.toggle-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.getAttribute('data-target');
+      const body = document.getElementById(id);
+      if(!body) return;
+      const collapsed = body.classList.toggle('collapsed');
+      btn.textContent = collapsed ? 'Expand' : 'Collapse';
+    });
+  });
+
+  // Smooth scroll for TOC links
+  document.querySelectorAll('.toc a').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const href = a.getAttribute('href');
+      const el = document.querySelector(href);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  // Copy buttons for examples
+  document.querySelectorAll('.copy-btn').forEach(b=>{
+    b.addEventListener('click', async ()=> {
+      const txt = b.getAttribute('data-copy') || b.previousElementSibling?.textContent || '';
+      try{
+        await navigator.clipboard.writeText(txt.trim());
+        b.textContent = 'Copied ✓';
+        setTimeout(()=> b.textContent = 'Copy',1200);
+      }catch(e){
+        alert('Copy failed — your browser may block clipboard access.');
+      }
+    });
+  });
+
+  // Formula tester (safe evaluator)
+  const exprIn = document.getElementById('expr');
+  const run = document.getElementById('run');
+  const clear = document.getElementById('clear');
+  const res = document.getElementById('res');
+
+  function sanitizeExpression(raw){
+    if(!raw || typeof raw !== 'string') return null;
+    // Allow digits, space, operators + - * / ^ ( ) and percent and decimal point
+    const allowed = /^[0-9+\-*/^().%\s,]+$/;
+    if(!allowed.test(raw)) return null;
+    // Convert commas to dot for decimals if user uses comma
+    let s = raw.replace(/,/g,'.');
+    // Replace percent: convert numbers followed by % into (n/100)
+    s = s.replace(/(\d+(\.\d+)?)\s*%/g, '($1/100)');
+    // Replace ^ with ** for JS exponentiation
+    s = s.replace(/\^/g, '**');
+    return s;
+  }
+
+  run.addEventListener('click', ()=>{
+    const raw = exprIn.value.trim();
+    const safe = sanitizeExpression(raw);
+    if(!safe){
+      res.style.display='block'; res.textContent = 'Expression invalid — only numbers and + - * / ^ ( ) % allowed.';
+      return;
+    }
+    try{
+      // eslint-disable-next-line no-new-func
+      const fn = new Function('return ('+safe+')');
+      const value = fn();
+      res.style.display='block';
+      res.textContent = 'Result: ' + (Number.isFinite(value) ? value : String(value));
+    }catch(e){
+      res.style.display='block';
+      res.textContent = 'Error evaluating expression: ' + e.message;
+    }
+  });
+
+  clear.addEventListener('click', ()=>{
+    exprIn.value=''; res.style.display='none';
+  });
+
+  // Highlight TOC based on scroll (simple)
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  function onScroll(){
+    const pos = window.scrollY + 120;
+    let active = sections.find(s => s.offsetTop <= pos && (s.offsetTop + s.offsetHeight) > pos);
+    if(!active) active = sections[0];
+    document.querySelectorAll('.toc a').forEach(a=> a.style.fontWeight='600');
+    if(active){
+      const link = document.querySelector('.toc a[href="#'+active.id+'"]');
+      if(link) link.style.fontWeight='900';
+    }
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Download placeholder TP1 (you can replace with actual file URL)
+  document.getElementById('download-tp').addEventListener('click', (e)=>{
+    e.preventDefault();
+    alert('TP1 download placeholder. I can generate a ready TP1 workbook (xlsx) and link it here if you want.');
+  });
+</script>
 </body>
-
 </html>
