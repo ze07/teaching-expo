@@ -601,7 +601,8 @@ tbody tr:nth-child(even) {
     <!-- Mobile Header -->
     <div class="header-mobile">
       <div class="logo-section">
-        <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <img src="logo-umkb.png" alt="UMKB Logo" class="logo-icon" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <svg class="logo-icon" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
         </svg>
         <div>
@@ -619,7 +620,8 @@ tbody tr:nth-child(even) {
 
     <!-- Desktop Header -->
     <div class="header-desktop">
-      <svg style="width:4rem;height:4rem;margin:0 auto 1rem;display:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <img src="logo-umkb.png" alt="UMKB Logo" style="width:4rem;height:4rem;margin:0 auto 1rem;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <svg style="width:4rem;height:4rem;margin:0 auto 1rem;display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
       </svg>
       <h1 class="desktop-title">Excel — Masterclass</h1>
@@ -658,185 +660,6 @@ tbody tr:nth-child(even) {
               Introduction & Interface
             </h2>
             <p class="section-desc">Master Excel workspace fundamentals</p>
-          </div>
-          <button class="toggle-btn" data-target="intro-content">
-            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div id="intro-content" class="section-content">
-          <div class="grid-2">
-            <div class="info-box bg-blue">
-              <h3 class="text-blue">🎯 Key Elements</h3>
-              <ul>
-                <li><strong>Ribbon:</strong> Tabs with tools (Home, Insert, Data)</li>
-                <li><strong>Quick Access:</strong> Save, Undo, Redo shortcuts</li>
-                <li><strong>Formula Bar:</strong> View/edit cell contents</li>
-                <li><strong>Status Bar:</strong> Quick calculations</li>
-              </ul>
-            </div>
-            <div class="info-box bg-emerald">
-              <h3 class="text-emerald">📝 Cell References</h3>
-              <ul>
-                <li><strong>Columns:</strong> A, B, C...Z, AA, AB</li>
-                <li><strong>Rows:</strong> 1, 2, 3...1,048,576</li>
-                <li><strong>Cells:</strong> A1, B2, Z100</li>
-                <li><strong>Ranges:</strong> A1:B10</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="alert-box">
-            <p><strong>💡 Teacher Tip:</strong> Always check the formula bar when evaluating student work. What appears in the cell may be formatted differently from the actual stored value.</p>
-          </div>
-
-          <div class="table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>A</th>
-                  <th>B</th>
-                  <th>C</th>
-                  <th>D</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>Item</td>
-                  <td>Qty</td>
-                  <td>Price</td>
-                  <td>Total</td>
-                </tr>
-                <tr>
-                  <th>2</th>
-                  <td>Notebook</td>
-                  <td>3</td>
-                  <td>6.50</td>
-                  <td>=B2*C2</td>
-                </tr>
-                <tr>
-                  <th>3</th>
-                  <td>Pen</td>
-                  <td>10</td>
-                  <td>0.75</td>
-                  <td>=B3*C3</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- Workbooks -->
-      <section id="workbooks" class="section-card border-blue">
-        <div class="section-header">
-          <div style="flex:1">
-            <h2 class="section-title">
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              Workbooks & Worksheets
-            </h2>
-            <p class="section-desc">Organize multiple sheets effectively</p>
-          </div>
-          <button class="toggle-btn" data-target="workbooks-content">
-            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div id="workbooks-content" class="section-content">
-          <div class="grid-2">
-            <div class="info-box bg-blue">
-              <h3 class="text-blue">🗂️ Best Practices</h3>
-              <ul>
-                <li>✅ Separate data from calculations</li>
-                <li>✅ Use index sheet for navigation</li>
-                <li>✅ Lock formulas with protection</li>
-                <li>✅ Version files (grades_v1.xlsx)</li>
-              </ul>
-            </div>
-            <div class="info-box bg-emerald">
-              <h3 class="text-emerald">📚 Organization</h3>
-              <ul>
-                <li>📊 Sheet 1: Raw data</li>
-                <li>🔧 Sheet 2: Calculations</li>
-                <li>📈 Sheet 3: Charts</li>
-                <li>📝 Sheet 4: Documentation</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Data Management -->
-      <section id="data" class="section-card border-purple">
-        <div class="section-header">
-          <div style="flex:1">
-            <h2 class="section-title">
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
-              </svg>
-              Data Management
-            </h2>
-            <p class="section-desc">Foundation of reliable analysis</p>
-          </div>
-          <button class="toggle-btn" data-target="data-content">
-            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div id="data-content" class="section-content">
-          <div class="info-box bg-purple">
-            <h3 class="text-purple">🎯 Cleaning Workflow</h3>
-            <ol style="list-style-position:inside">
-              <li>Keep original raw data tab</li>
-              <li>Create cleaned copy</li>
-              <li>Remove blanks, trim spaces</li>
-              <li>Normalize formats</li>
-              <li>Document assumptions</li>
-            </ol>
-          </div>
-
-          <div class="grid-2">
-            <div class="info-box bg-blue">
-              <h3 class="text-blue">✨ Smart Features</h3>
-              <ul>
-                <li>• Data Validation (lists, ranges)</li>
-                <li>• Flash Fill (pattern recognition)</li>
-                <li>• Tables (structured references)</li>
-              </ul>
-            </div>
-            <div class="info-box bg-emerald">
-              <h3 class="text-emerald">🔍 Quality Checks</h3>
-              <ul>
-                <li>• Check for duplicates</li>
-                <li>• Verify data types</li>
-                <li>• Look for outliers</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Formatting -->
-      <section id="formatting" class="section-card border-pink">
-        <div class="section-header">
-          <div style="flex:1">
-            <h2 class="section-title">
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-              </svg>
-              Formatting & Visualization
-            </h2>
-            <p class="section-desc">Transform numbers into insights</p>
           </div>
           <button class="toggle-btn" data-target="formatting-content">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1374,4 +1197,183 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 </body>
-</html>
+</html>="intro-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="intro-content" class="section-content">
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🎯 Key Elements</h3>
+              <ul>
+                <li><strong>Ribbon:</strong> Tabs with tools (Home, Insert, Data)</li>
+                <li><strong>Quick Access:</strong> Save, Undo, Redo shortcuts</li>
+                <li><strong>Formula Bar:</strong> View/edit cell contents</li>
+                <li><strong>Status Bar:</strong> Quick calculations</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">📝 Cell References</h3>
+              <ul>
+                <li><strong>Columns:</strong> A, B, C...Z, AA, AB</li>
+                <li><strong>Rows:</strong> 1, 2, 3...1,048,576</li>
+                <li><strong>Cells:</strong> A1, B2, Z100</li>
+                <li><strong>Ranges:</strong> A1:B10</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <p><strong>💡 Teacher Tip:</strong> Always check the formula bar when evaluating student work. What appears in the cell may be formatted differently from the actual stored value.</p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>A</th>
+                  <th>B</th>
+                  <th>C</th>
+                  <th>D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Item</td>
+                  <td>Qty</td>
+                  <td>Price</td>
+                  <td>Total</td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td>Notebook</td>
+                  <td>3</td>
+                  <td>6.50</td>
+                  <td>=B2*C2</td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td>Pen</td>
+                  <td>10</td>
+                  <td>0.75</td>
+                  <td>=B3*C3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Workbooks -->
+      <section id="workbooks" class="section-card border-blue">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              Workbooks & Worksheets
+            </h2>
+            <p class="section-desc">Organize multiple sheets effectively</p>
+          </div>
+          <button class="toggle-btn" data-target="workbooks-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="workbooks-content" class="section-content">
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🗂️ Best Practices</h3>
+              <ul>
+                <li>✅ Separate data from calculations</li>
+                <li>✅ Use index sheet for navigation</li>
+                <li>✅ Lock formulas with protection</li>
+                <li>✅ Version files (grades_v1.xlsx)</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">📚 Organization</h3>
+              <ul>
+                <li>📊 Sheet 1: Raw data</li>
+                <li>🔧 Sheet 2: Calculations</li>
+                <li>📈 Sheet 3: Charts</li>
+                <li>📝 Sheet 4: Documentation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Management -->
+      <section id="data" class="section-card border-purple">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+              Data Management
+            </h2>
+            <p class="section-desc">Foundation of reliable analysis</p>
+          </div>
+          <button class="toggle-btn" data-target="data-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="data-content" class="section-content">
+          <div class="info-box bg-purple">
+            <h3 class="text-purple">🎯 Cleaning Workflow</h3>
+            <ol style="list-style-position:inside">
+              <li>Keep original raw data tab</li>
+              <li>Create cleaned copy</li>
+              <li>Remove blanks, trim spaces</li>
+              <li>Normalize formats</li>
+              <li>Document assumptions</li>
+            </ol>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">✨ Smart Features</h3>
+              <ul>
+                <li>• Data Validation (lists, ranges)</li>
+                <li>• Flash Fill (pattern recognition)</li>
+                <li>• Tables (structured references)</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">🔍 Quality Checks</h3>
+              <ul>
+                <li>• Check for duplicates</li>
+                <li>• Verify data types</li>
+                <li>• Look for outliers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formatting -->
+      <section id="formatting" class="section-card border-pink">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
+              Formatting & Visualization
+            </h2>
+            <p class="section-desc">Transform numbers into insights</p>
+          </div>
+          <button class="toggle-btn" data-target
