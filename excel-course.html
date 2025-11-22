@@ -1,563 +1,672 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="google-adsense-account" content="ca-pub-1090194600933033">
-<title>Excel — Masterclass · Teaching Expo (UMKB)</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1090194600933033"
-     crossorigin="anonymous"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-76B9FK0M62"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+import React, { useState, useEffect } from 'react';
+import { Menu, X, ChevronDown, ChevronUp, Copy, Check, Calculator, BookOpen, FileSpreadsheet, Palette, Code, Lightbulb } from 'lucide-react';
 
-  gtag('config', 'G-76B9FK0M62');
-</script>
+export default function ExcelMasterclass() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({});
+  const [expression, setExpression] = useState('');
+  const [result, setResult] = useState(null);
+  const [copiedIndex, setCopiedIndex] = useState(null);
+  const [activeSection, setActiveSection] = useState('intro');
 
-<!-- Styles: UMKB palette, responsive, print-friendly -->
-<style>
-  :root{
-    --umkb-blue:#0B3D91;
-    --umkb-green:#006b3f;
-    --umkb-orange:#E67E22;
-    --accent-red:#c8102e;
-    --bg:#f6f8fc;
-    --text:#22262a;
-    --card:#ffffff;
-  }
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
-    background:var(--bg);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    line-height:1.6;
-    padding-bottom:80px;
-  }
+  const toggleSection = (id) => {
+    setExpandedSections(prev => ({...prev, [id]: !prev[id]}));
+  };
 
-  /* Top hero */
-  .hero{
-    background:linear-gradient(90deg,var(--umkb-green),var(--umkb-blue));
-    color:white;
-    padding:48px 20px;
-    text-align:center;
-  }
-  .hero .logo{
-    height:72px;
-    display:block;
-    margin:0 auto 12px;
-  }
-  .hero h1{font-size:34px;margin:6px 0 8px;font-weight:700}
-  .hero p{opacity:.95;margin:0 auto;max-width:900px}
+  const evaluateExpression = () => {
+    try {
+      let safe = expression.replace(/,/g, '.');
+      safe = safe.replace(/(\d+(\.\d+)?)\s*%/g, '($1/100)');
+      safe = safe.replace(/\^/g, '**');
+      
+      if (!/^[0-9+\-*/^().%\s,]+$/.test(expression)) {
+        setResult('Invalid expression - use only numbers and + - * / ^ ( ) %');
+        return;
+      }
+      
+      const fn = new Function('return (' + safe + ')');
+      const value = fn();
+      setResult(`Result: ${Number.isFinite(value) ? value.toFixed(4) : String(value)}`);
+    } catch (e) {
+      setResult(`Error: ${e.message}`);
+    }
+  };
 
-  /* Layout: sticky toc + content */
-  .wrap{
-    display:grid;
-    grid-template-columns: 280px 1fr;
-    gap:28px;
-    width:90%;
-    max-width:1200px;
-    margin:28px auto;
-  }
-  @media (max-width:900px){
-    .wrap{grid-template-columns:1fr;padding:0 12px}
-    .toc{position:static;order: -1}
-  }
+  const copyFormula = async (formula, index) => {
+    try {
+      await navigator.clipboard.writeText(formula);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    } catch (e) {
+      alert('Copy failed');
+    }
+  };
 
-  /* TOC */
-  .toc{
-    position:sticky;
-    top:18px;
-    height:calc(100vh - 36px);
-    overflow:auto;
-    padding:18px;
-    background:var(--card);
-    border-radius:12px;
-    box-shadow:0 6px 18px rgba(10,20,40,0.06);
-    border-left:6px solid var(--umkb-orange);
-  }
-  .toc h3{margin:0 0 8px;color:var(--umkb-blue); font-size:16px}
-  .toc ul{list-style:none;padding:0;margin:0}
-  .toc li{margin:10px 0}
-  .toc a{color:var(--umkb-green);text-decoration:none;font-weight:600}
-  .toc a:hover{text-decoration:underline}
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['intro', 'workbooks', 'data', 'formatting', 'formulas', 'lab', 'tester', 'resources'];
+      const current = sections.find(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 150 && rect.bottom >= 150;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  /* Content */
-  .content{padding:8px 0}
-  .card{
-    background:var(--card);
-    border-radius:12px;
-    padding:22px;
-    box-shadow:0 6px 20px rgba(12,18,40,0.04);
-    margin-bottom:20px;
-    border-left:6px solid var(--umkb-orange);
-  }
-  h2{color:var(--umkb-blue);margin:0 0 12px;font-size:22px}
-  h3{color:var(--umkb-green);margin:18px 0 10px;font-size:18px}
-  p, ul{margin:8px 0}
-  ul{padding-left:20px}
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMenuOpen(false);
+    }
+  };
 
-  /* Collapsible */
-  .module-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-  }
-  .toggle-btn{
-    background:transparent;border:1px solid rgba(0,0,0,0.06);
-    padding:8px 12px;border-radius:8px;
-    cursor:pointer;font-weight:600;color:var(--umkb-blue);
-    transition:.15s;
-  }
-  .toggle-btn:hover{transform:translateY(-2px)}
-  .module-body{margin-top:12px;display:block}
-  .module-body.collapsed{display:none}
+  const formulas = [
+    { name: 'Basic Sum', code: '=SUM(A1:A10)', desc: 'Add range of cells' },
+    { name: 'Average', code: '=AVERAGE(B1:B20)', desc: 'Calculate mean' },
+    { name: 'IF Statement', code: '=IF(A1>100, "High", "Low")', desc: 'Conditional logic' },
+    { name: 'VLOOKUP', code: '=VLOOKUP(E2, A2:B10, 2, FALSE)', desc: 'Vertical lookup' },
+    { name: 'Tax Calc', code: '=B2 * 0.17', desc: '17% tax calculation' },
+    { name: 'Percentage', code: '=A1 * 10%', desc: '10% of value' }
+  ];
 
-  /* Formula table */
-  .formula-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px}
-  .formula-table th,.formula-table td{border:1px solid #e6e9ef;padding:10px;text-align:left}
-  .formula-table th{background:var(--umkb-blue);color:white;font-weight:600}
-  .formula-table tr:nth-child(even){background:#fbfcfe}
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <style>{`
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .sticky-top { position: sticky; top: 0; z-index: 50; }
+        @media (max-width: 768px) {
+          .mobile-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+        }
+      `}</style>
 
-  /* Interactive tester */
-  .tester{
-    display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap
-  }
-  .input{
-    flex:1;min-width:220px;padding:10px 12px;border-radius:8px;border:1px solid #d7dbe6;font-size:15px
-  }
-  .btn{
-    background:var(--umkb-green);color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:700;
-  }
-  .btn.secondary{background:var(--umkb-blue)}
-  .result{
-    margin-top:12px;padding:12px;border-radius:8px;background:#f3f7ff;border-left:4px solid var(--umkb-blue);
-    font-weight:700;color:var(--umkb-blue)
-  }
-
-  /* Code / example blocks */
-  pre.code{
-    background:#0f1724;color:#f8fafc;padding:12px;border-radius:8px;overflow:auto;font-family:Consolas,monospace;font-size:13px;margin-top:10px
-  }
-  .example{
-    display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:10px
-  }
-  .copy-btn{background:#eef2ff;border:1px solid #dbe4ff;color:var(--umkb-blue);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600}
-  .copy-btn:active{transform:translateY(1px)}
-
-  /* small spreadsheet preview */
-  .sheet{
-    width:100%;border-collapse:collapse;margin-top:12px;font-size:14px
-  }
-  .sheet th,.sheet td{border:1px solid #e3e6ee;padding:8px;text-align:left;background:white}
-  .sheet th{background:#f4f7ff;color:var(--umkb-blue);font-weight:700}
-  .sheet tr:nth-child(even) td{background:#fbfcfe}
-
-  /* footer */
-  footer{padding:20px;text-align:center;background:var(--umkb-blue);color:white;border-top:4px solid var(--umkb-orange);margin-top:28px}
-
-  /* print friendly */
-  @media print{
-    .toc, .toggle-btn, .copy-btn, .tester .btn{display:none}
-    body{background:white}
-    .wrap{grid-template-columns:1fr}
-  }
-</style>
-</head>
-
-<body>
-
-<!-- HERO -->
-<section class="hero" role="banner" aria-label="Excel masterclass">
-  <img src="logo-umkb.png" alt="UMKB logo" class="logo" />
-  <h1>Excel — Masterclass</h1>
-  <p><strong>Instructor:</strong>Zineb Djihane Agli — advanced practical course covering interface, formulas, formatting, and labs. This page offers interactive learning guidance.</p>
-</section>
-
-<!-- MAIN LAYOUT -->
-<div class="wrap" role="main">
-
-  <!-- TABLE OF CONTENTS -->
-  <aside class="toc" aria-label="Table of contents">
-    <h3>Course contents</h3>
-    <ul>
-      <li><a href="#intro">Introduction & Interface</a></li>
-      <li><a href="#workbooks">Workbooks & Worksheets</a></li>
-      <li><a href="#data">Entering & Managing Data</a></li>
-      <li><a href="#formatting">Formatting & Visualization</a></li>
-      <li><a href="#formulas">Formulas & Functions</a></li>
-      <li><a href="#lab">Practical Lab (TP1)</a></li>
-      <li><a href="#formula-tester">Try a formula</a></li>
-      <li><a href="#resources">Resources & Tips</a></li>
-    </ul>
-
-    <hr style="margin:14px 0;border:none;border-top:1px solid #eef2f8">
-
-    <h3>Quick links</h3>
-    <ul>
-      <li><a href="excel-course.html">Original course page</a></li>
-      <li><a href="home.html">Back to Courses</a></li>
-    </ul>
-  </aside>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <!-- Introduction -->
-    <section id="intro" class="card" aria-labelledby="h-intro">
-      <div class="module-header">
-        <div>
-          <h2 id="h-intro">Introduction & Interface</h2>
-          <p style="margin-top:6px;color:#475569">Opening Excel reveals a rich interface. Focus on the Ribbon, Quick Access, Formula bar and Status bar — these are your daily tools.</p>
+      {/* Mobile Header */}
+      <div className="mobile-nav sticky-top bg-gradient-to-r from-emerald-600 to-blue-700 text-white shadow-xl">
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center gap-3">
+            <FileSpreadsheet className="w-8 h-8" />
+            <div>
+              <h1 className="text-lg font-bold leading-tight">Excel Masterclass</h1>
+              <p className="text-xs opacity-90">UMKB ICT Module</p>
+            </div>
+          </div>
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
-        <button class="toggle-btn" data-target="m-intro">Collapse</button>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="bg-white text-gray-800 shadow-2xl border-t border-gray-200">
+            <nav className="p-4 space-y-2 max-h-96 overflow-y-auto">
+              {[
+                { id: 'intro', icon: BookOpen, label: 'Introduction' },
+                { id: 'workbooks', icon: FileSpreadsheet, label: 'Workbooks' },
+                { id: 'data', icon: Code, label: 'Data Management' },
+                { id: 'formatting', icon: Palette, label: 'Formatting' },
+                { id: 'formulas', icon: Calculator, label: 'Formulas' },
+                { id: 'lab', icon: Lightbulb, label: 'Practical Lab' },
+                { id: 'tester', icon: Calculator, label: 'Formula Tester' },
+                { id: 'resources', icon: BookOpen, label: 'Resources' }
+              ].map(({ id, icon: Icon, label }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${
+                    activeSection === id 
+                      ? 'bg-emerald-100 text-emerald-700 font-semibold' 
+                      : 'hover:bg-gray-100'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
 
-      <div id="m-intro" class="module-body">
-        <h3>Key elements (quick guide)</h3>
-        <ul>
-          <li><strong>Ribbon:</strong> Tabs like Home, Insert, Data — grouped tools for formatting, formulas and charts. Hover to see tooltips.</li>
-          <li><strong>Quick Access Toolbar:</strong> Small shortcuts (Save, Undo). Customize for commands you use daily.</li>
-          <li><strong>Worksheet grid:</strong> Columns (A, B, C…), Rows (1, 2, 3…) — cells are referenced as A1, B2.</li>
-          <li><strong>Formula Bar:</strong> Displays/edit the exact content of the selected cell (text, number or formula).</li>
-          <li><strong>Status Bar:</strong> Shows quick calculations (Sum, Average) for the selected range and display options.</li>
-        </ul>
-
-        <h3>Professor note</h3>
-        <p><em>Always check the formula bar when evaluating student answers: what is visible in the cell may be formatted; the formula bar reveals the true stored value.</em></p>
-
-        <!-- small visual sheet -->
-        <table class="sheet" role="table" aria-label="Example sheet">
-          <thead>
-            <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
-          </thead>
-          <tbody>
-            <tr><th>1</th><td>Item</td><td>Qty</td><td>Unit price</td><td>Total</td></tr>
-            <tr><th>2</th><td>Notebook</td><td>3</td><td>6.50</td><td>=B2*C2</td></tr>
-            <tr><th>3</th><td>Pen</td><td>10</td><td>0.75</td><td>=B3*C3</td></tr>
-            <tr><th>4</th><td><strong>Grand total</strong></td><td></td><td></td><td>=SUM(D2:D3)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Workbooks -->
-    <section id="workbooks" class="card" aria-labelledby="h-workbooks">
-      <div class="module-header">
-        <div><h2 id="h-workbooks">Workbooks & Worksheets</h2><p style="margin-top:6px">Concepts and best practices for managing multiple sheets and larger projects.</p></div>
-        <button class="toggle-btn" data-target="m-workbooks">Collapse</button>
+      {/* Desktop Header */}
+      <div className="hidden md:block bg-gradient-to-r from-emerald-600 to-blue-700 text-white py-12 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center mb-4">
+            <FileSpreadsheet className="w-16 h-16" />
+          </div>
+          <h1 className="text-4xl font-bold mb-3">Excel — Masterclass</h1>
+          <p className="text-lg opacity-95">
+            <strong>Instructor:</strong> Zineb Djihane Agli | UMKB ICT Module
+          </p>
+          <p className="mt-2 text-sm opacity-90">Advanced practical course for L1 students</p>
+        </div>
       </div>
 
-      <div id="m-workbooks" class="module-body">
-        <h3>Advanced practices</h3>
-        <ul>
-          <li><strong>Organize by purpose:</strong> raw data, working calculations, presentation sheets.</li>
-          <li><strong>Use an index sheet:</strong> list sheets and provide links — improves navigation for students.</li>
-          <li><strong>Sheet protection:</strong> lock formulas before sharing with students to prevent accidental edits.</li>
-          <li><strong>Versioning:</strong> keep archived copies like <em>grades_v1.xlsx</em> to track changes.</li>
-        </ul>
-
-        <h3>Professor tip</h3>
-        <p>Teach students to separate data from analysis—this reduces errors and simplifies auditing.</p>
-      </div>
-    </section>
-
-    <!-- Data -->
-    <section id="data" class="card" aria-labelledby="h-data">
-      <div class="module-header">
-        <div><h2 id="h-data">Entering & Managing Data</h2><p style="margin-top:6px">Good data hygiene is the foundation of reliable analysis.</p></div>
-        <button class="toggle-btn" data-target="m-data">Collapse</button>
-      </div>
-
-      <div id="m-data" class="module-body">
-        <h3>Selecting & Entry</h3>
-        <ul>
-          <li>Prefer structured ranges and Tables (Insert → Table) — named tables improve formulas.</li>
-          <li>Use Data Validation to enforce correct inputs (lists, date ranges, numeric limits).</li>
-          <li>Flash Fill for repeated structured patterns (use sparingly; teach correctness first).</li>
-        </ul>
-
-        <h3>Data cleaning workflow</h3>
-        <ol>
-          <li>Keep an original raw tab.</li>
-          <li>Make a cleaned copy (remove blanks, trim spaces).</li>
-          <li>Normalize formats (dates, text case).</li>
-          <li>Document assumptions in a README sheet.</li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- Formatting -->
-    <section id="formatting" class="card" aria-labelledby="h-formatting">
-      <div class="module-header">
-        <div><h2 id="h-formatting">Formatting & Data Visualization</h2><p style="margin-top:6px">Turn numbers into insights with careful formatting and charts.</p></div>
-        <button class="toggle-btn" data-target="m-formatting">Collapse</button>
-      </div>
-
-      <div id="m-formatting" class="module-body">
-        <h3>Key techniques</h3>
-        <ul>
-          <li><strong>Number formats:</strong> currency, percentage, accounting, or custom formats (e.g., 0.0,"M" for millions).</li>
-          <li><strong>Conditional formatting:</strong> color scales, data bars, icon sets — excellent for quick visual triage.</li>
-          <li><strong>Tables:</strong> enable filters, structured references and banded rows for readability.</li>
-        </ul>
-
-        <h3>Charts & sparklines</h3>
-        <p>Use charts to show trends (line), composition (stacked column), or comparison (column). Add sparklines for compact trend indicators next to rows.</p>
-
-        <h3>Professor note</h3>
-        <p>Prioritise clarity: choose colors for accessibility; annotate charts with source and calculation notes.</p>
-      </div>
-    </section>
-
-    <!-- Formulas -->
-    <section id="formulas" class="card" aria-labelledby="h-formulas">
-      <div class="module-header">
-        <div><h2 id="h-formulas">Formulas & Functions — Mastering Excel Formulas</h2>
-          <p style="margin-top:6px">Reference table and advanced guidance for common operations.</p></div>
-        <button class="toggle-btn" data-target="m-formulas">Collapse</button>
-      </div>
-
-      <div id="m-formulas" class="module-body">
-        <h3>Operators & Examples</h3>
-        <table class="formula-table" role="table" aria-label="Operators table">
-          <thead>
-            <tr><th>Operation</th><th>Symbol</th><th>Example</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Addition</td><td>+</td><td><code>=A1 + B1</code></td></tr>
-            <tr><td>Subtraction</td><td>-</td><td><code>=A1 - B1</code></td></tr>
-            <tr><td>Multiplication</td><td>*</td><td><code>=A1 * B1</code></td></tr>
-            <tr><td>Division</td><td>/</td><td><code>=A1 / B1</code></td></tr>
-            <tr><td>Exponent</td><td>^</td><td><code>=A1 ^ 2</code></td></tr>
-            <tr><td>Percentage</td><td>%</td><td><code>=A1 * 10%</code></td></tr>
-          </tbody>
-        </table>
-
-        <h3 style="margin-top:14px">Essential functions (with professor notes)</h3>
-        <ul>
-          <li><strong>SUM(range)</strong>: <code>=SUM(A1:A10)</code> — use for totals; avoid nested SUMs when unnecessary.</li>
-          <li><strong>AVERAGE(range)</strong>: useful for central tendency; check for outliers first.</li>
-          <li><strong>MIN / MAX</strong>: quick range checks.</li>
-          <li><strong>COUNT / COUNTA</strong>: counts of numeric entries vs non-empty cells.</li>
-          <li><strong>IF / IFS</strong>: conditional logic. Prefer IFS for multiple conditions in modern Excel.</li>
-          <li><strong>VLOOKUP / INDEX+MATCH / XLOOKUP</strong>: teach INDEX+MATCH or XLOOKUP (where available) — they are reliable for two-way lookups.</li>
-          <li><strong>TEXT / DATE functions</strong>: TEXT(), DATE(), YEAR(), MONTH() — essential for data normalization.</li>
-        </ul>
-
-        <h3>Mastering tips</h3>
-        <ul>
-          <li>Use parentheses to make order of operations explicit.</li>
-          <li>Use named ranges and structured table references for clarity and maintainability.</li>
-          <li>Build complex formulas in steps using helper columns for readability and debugging.</li>
-          <li>Document your logic in a comment or a help sheet for other readers.</li>
-        </ul>
-
-        <div style="margin-top:12px">
-          <div class="example">
-            <div><strong>Example:</strong> calculate tax — <code>=B2 * 0.17</code></div>
-            <button class="copy-btn" data-copy="=B2 * 0.17">Copy</button>
+      <div className="max-w-6xl mx-auto p-4 md:p-6 lg:p-8 mt-4">
+        
+        {/* Introduction */}
+        <section id="intro" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-emerald-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-emerald-600" />
+                Introduction & Interface
+              </h2>
+              <p className="text-gray-600 mt-2">Master the Excel workspace fundamentals</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('intro')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.intro ? <ChevronUp /> : <ChevronDown />}
+            </button>
           </div>
 
-          <pre class="code" aria-hidden="true"><code>
-=IF(SUM(B2:B10)>1000, "Bonus", "No bonus")
-=INDEX(A2:A10, MATCH(E2, B2:B10, 0))
-          </code></pre>
+          {!expandedSections.intro && (
+            <div className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-blue-900 mb-2">🎯 Key Elements</h3>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li><strong>Ribbon:</strong> Tabs with grouped tools (Home, Insert, Data)</li>
+                    <li><strong>Quick Access:</strong> Shortcuts for Save, Undo, Redo</li>
+                    <li><strong>Formula Bar:</strong> View and edit cell contents</li>
+                    <li><strong>Status Bar:</strong> Quick calculations for selections</li>
+                  </ul>
+                </div>
+
+                <div className="bg-emerald-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-emerald-900 mb-2">📝 Cell References</h3>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li><strong>Columns:</strong> A, B, C, ... Z, AA, AB...</li>
+                    <li><strong>Rows:</strong> 1, 2, 3, ... 1048576</li>
+                    <li><strong>Cells:</strong> A1, B2, Z100</li>
+                    <li><strong>Ranges:</strong> A1:B10 (rectangular selection)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                <p className="text-sm text-yellow-900">
+                  <strong>💡 Teacher Tip:</strong> Always check the formula bar when evaluating student work. 
+                  What appears in the cell may be formatted differently from the actual stored value.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-blue-600 text-white">
+                      <th className="border border-gray-300 p-2"></th>
+                      <th className="border border-gray-300 p-2">A</th>
+                      <th className="border border-gray-300 p-2">B</th>
+                      <th className="border border-gray-300 p-2">C</th>
+                      <th className="border border-gray-300 p-2">D</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-gray-50">
+                      <th className="border border-gray-300 p-2 bg-gray-200">1</th>
+                      <td className="border border-gray-300 p-2">Item</td>
+                      <td className="border border-gray-300 p-2">Qty</td>
+                      <td className="border border-gray-300 p-2">Price</td>
+                      <td className="border border-gray-300 p-2">Total</td>
+                    </tr>
+                    <tr>
+                      <th className="border border-gray-300 p-2 bg-gray-200">2</th>
+                      <td className="border border-gray-300 p-2">Notebook</td>
+                      <td className="border border-gray-300 p-2">3</td>
+                      <td className="border border-gray-300 p-2">6.50</td>
+                      <td className="border border-gray-300 p-2 font-mono text-xs">=B2*C2</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <th className="border border-gray-300 p-2 bg-gray-200">3</th>
+                      <td className="border border-gray-300 p-2">Pen</td>
+                      <td className="border border-gray-300 p-2">10</td>
+                      <td className="border border-gray-300 p-2">0.75</td>
+                      <td className="border border-gray-300 p-2 font-mono text-xs">=B3*C3</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Workbooks */}
+        <section id="workbooks" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-blue-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <FileSpreadsheet className="w-6 h-6 text-blue-600" />
+                Workbooks & Worksheets
+              </h2>
+              <p className="text-gray-600 mt-2">Organize and manage multiple sheets effectively</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('workbooks')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.workbooks ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          </div>
+
+          {!expandedSections.workbooks && (
+            <div className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
+                  <h3 className="font-semibold text-blue-900 mb-3">🗂️ Best Practices</h3>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>✅ Separate raw data from calculations</li>
+                    <li>✅ Use an index sheet for navigation</li>
+                    <li>✅ Lock formulas with sheet protection</li>
+                    <li>✅ Version your files (e.g., grades_v1.xlsx)</li>
+                  </ul>
+                </div>
+
+                <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-4 rounded-lg">
+                  <h3 className="font-semibold text-emerald-900 mb-3">📚 Organization Tips</h3>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li>📊 Sheet 1: Raw data</li>
+                    <li>🔧 Sheet 2: Calculations</li>
+                    <li>📈 Sheet 3: Presentation/Charts</li>
+                    <li>📝 Sheet 4: Documentation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Data Management */}
+        <section id="data" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-purple-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <Code className="w-6 h-6 text-purple-600" />
+                Entering & Managing Data
+              </h2>
+              <p className="text-gray-600 mt-2">Foundation of reliable analysis</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('data')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.data ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          </div>
+
+          {!expandedSections.data && (
+            <div className="space-y-4">
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <h3 className="font-semibold text-purple-900 mb-3">🎯 Data Cleaning Workflow</h3>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                  <li>Keep an original raw data tab (never modify)</li>
+                  <li>Create a cleaned copy for processing</li>
+                  <li>Remove blanks and trim extra spaces</li>
+                  <li>Normalize formats (dates, text case)</li>
+                  <li>Document all assumptions in README sheet</li>
+                </ol>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">✨ Smart Features</h3>
+                  <ul className="space-y-1 text-sm text-gray-700">
+                    <li>• Data Validation (lists, ranges)</li>
+                    <li>• Flash Fill (pattern recognition)</li>
+                    <li>• Tables (structured references)</li>
+                  </ul>
+                </div>
+
+                <div className="bg-emerald-50 p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">🔍 Quality Checks</h3>
+                  <ul className="space-y-1 text-sm text-gray-700">
+                    <li>• Check for duplicates</li>
+                    <li>• Verify data types</li>
+                    <li>• Look for outliers</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Formatting */}
+        <section id="formatting" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-pink-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <Palette className="w-6 h-6 text-pink-600" />
+                Formatting & Visualization
+              </h2>
+              <p className="text-gray-600 mt-2">Transform numbers into insights</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('formatting')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.formatting ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          </div>
+
+          {!expandedSections.formatting && (
+            <div className="space-y-4">
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-gradient-to-br from-pink-50 to-rose-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-pink-900 mb-2">💰 Number Formats</h3>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li>Currency: $1,234.56</li>
+                    <li>Percentage: 45.2%</li>
+                    <li>Custom: 0.0,"M"</li>
+                  </ul>
+                </div>
+
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-blue-900 mb-2">🎨 Conditional</h3>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li>Color scales</li>
+                    <li>Data bars</li>
+                    <li>Icon sets</li>
+                  </ul>
+                </div>
+
+                <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-purple-900 mb-2">📊 Charts</h3>
+                  <ul className="space-y-1 text-xs text-gray-700">
+                    <li>Line: Trends</li>
+                    <li>Column: Compare</li>
+                    <li>Pie: Composition</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                <p className="text-sm text-yellow-900">
+                  <strong>🎯 Clarity First:</strong> Choose accessible colors and annotate charts with sources
+                </p>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Formulas */}
+        <section id="formulas" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-orange-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <Calculator className="w-6 h-6 text-orange-600" />
+                Formulas & Functions
+              </h2>
+              <p className="text-gray-600 mt-2">Master Excel calculations</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('formulas')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.formulas ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          </div>
+
+          {!expandedSections.formulas && (
+            <div className="space-y-4">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-orange-600 text-white">
+                      <th className="border border-gray-300 p-3 text-left">Operation</th>
+                      <th className="border border-gray-300 p-3 text-center">Symbol</th>
+                      <th className="border border-gray-300 p-3 text-left">Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Addition', '+', '=A1 + B1'],
+                      ['Subtraction', '-', '=A1 - B1'],
+                      ['Multiplication', '*', '=A1 * B1'],
+                      ['Division', '/', '=A1 / B1'],
+                      ['Exponent', '^', '=A1 ^ 2'],
+                      ['Percentage', '%', '=A1 * 10%']
+                    ].map(([op, sym, ex], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : ''}>
+                        <td className="border border-gray-300 p-3">{op}</td>
+                        <td className="border border-gray-300 p-3 text-center font-bold text-lg">{sym}</td>
+                        <td className="border border-gray-300 p-3 font-mono text-xs">{ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {formulas.map((f, i) => (
+                  <div key={i} className="bg-gradient-to-br from-slate-50 to-slate-100 p-4 rounded-lg border border-slate-200">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold text-gray-800 text-sm">{f.name}</h4>
+                      <button
+                        onClick={() => copyFormula(f.code, i)}
+                        className="p-1 hover:bg-white rounded transition-colors"
+                      >
+                        {copiedIndex === i ? (
+                          <Check className="w-4 h-4 text-green-600" />
+                        ) : (
+                          <Copy className="w-4 h-4 text-gray-600" />
+                        )}
+                      </button>
+                    </div>
+                    <code className="block bg-slate-800 text-green-400 px-2 py-1 rounded text-xs mb-2 overflow-x-auto">
+                      {f.code}
+                    </code>
+                    <p className="text-xs text-gray-600">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h3 className="font-semibold text-blue-900 mb-3">💡 Pro Tips</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li>✓ Use parentheses to control calculation order</li>
+                  <li>✓ Name your ranges for clearer formulas</li>
+                  <li>✓ Build complex formulas step-by-step</li>
+                  <li>✓ Add comments to explain your logic</li>
+                </ul>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Formula Tester */}
+        <section id="tester" className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-teal-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <Calculator className="w-6 h-6 text-teal-600" />
+                Interactive Formula Tester
+              </h2>
+              <p className="text-gray-600 mt-2">Practice calculations in real-time</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Enter expression (numbers, +, -, *, /, ^, %, parentheses):
+              </label>
+              <input
+                type="text"
+                value={expression}
+                onChange={(e) => setExpression(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && evaluateExpression()}
+                placeholder="Example: (100 + 50) * 10% + 20"
+                className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-teal-500 focus:outline-none text-base"
+              />
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={evaluateExpression}
+                className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg"
+              >
+                Calculate
+              </button>
+              <button
+                onClick={() => { setExpression(''); setResult(null); }}
+                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg"
+              >
+                Clear
+              </button>
+            </div>
+
+            {result && (
+              <div className="bg-teal-100 border-l-4 border-teal-600 p-4 rounded-lg">
+                <p className="font-bold text-teal-900">{result}</p>
+              </div>
+            )}
+
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="text-sm text-blue-900">
+                <strong>Note:</strong> This tester is for arithmetic practice. For full Excel functions (VLOOKUP, IF, etc.), use Excel directly.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Practical Lab */}
+        <section id="lab" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-red-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <Lightbulb className="w-6 h-6 text-red-600" />
+                Practical Lab — TP1
+              </h2>
+              <p className="text-gray-600 mt-2">Hands-on assignment with evaluation criteria</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('lab')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.lab ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          </div>
+
+          {!expandedSections.lab && (
+            <div className="space-y-4">
+              <div className="bg-red-50 p-4 rounded-lg">
+                <h3 className="font-semibold text-red-900 mb-3">📋 Assignment Tasks</h3>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                  <li>Create workbook named <em>TP Excel</em> with sheets: TP1, TP2, TP3, TP4</li>
+                  <li>On <strong>TP1</strong> create a 5×5 table with headers: Item, Qty, Unit price, Discount%, Net price</li>
+                  <li>Apply formatting: currency for prices, percentage for discount</li>
+                  <li>Use conditional formatting for Net price &lt; 5</li>
+                  <li>Calculate totals using SUM, create a chart showing item vs net price</li>
+                </ol>
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg">
+                <h3 className="font-semibold text-purple-900 mb-3">📊 Evaluation Rubric</h3>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-semibold">Formulas & Functions</span>
+                      <span className="text-lg font-bold text-purple-600">40%</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Correct calculations and function usage</p>
+                  </div>
+
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-semibold">Formatting & Visual</span>
+                      <span className="text-lg font-bold text-pink-600">30%</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Professional appearance and charts</p>
+                  </div>
+
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-semibold">Data Validation</span>
+                      <span className="text-lg font-bold text-blue-600">20%</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Robustness and error handling</p>
+                  </div>
+
+                  <div className="bg-white p-3 rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-semibold">Documentation</span>
+                      <span className="text-lg font-bold text-green-600">10%</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Comments and clarity</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Resources */}
+        <section id="resources" className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4 border-indigo-500">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-indigo-600" />
+                Resources & Further Reading
+              </h2>
+              <p className="text-gray-600 mt-2">Essential links and references</p>
+            </div>
+            <button 
+              onClick={() => toggleSection('resources')}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {expandedSections.resources ? <ChevronUp /> : <ChevronDown />}
+            </button>
+          </div>
+
+          {!expandedSections.resources && (
+            <div className="space-y-3">
+              <a 
+                href="https://www.geeksforgeeks.org/excel/introduction-to-ms-excel/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg hover:shadow-md transition-shadow border border-indigo-200"
+              >
+                <h3 className="font-semibold text-indigo-900 mb-1">GeeksforGeeks — Excel Introduction</h3>
+                <p className="text-sm text-gray-600">Comprehensive beginner tutorials</p>
+              </a>
+
+              <a 
+                href="https://support.microsoft.com/excel"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg hover:shadow-md transition-shadow border border-blue-200"
+              >
+                <h3 className="font-semibold text-blue-900 mb-1">Microsoft Excel Support</h3>
+                <p className="text-sm text-gray-600">Official documentation and help</p>
+              </a>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg">
+                <p className="text-sm text-yellow-900">
+                  <strong>📥 Download Materials:</strong> TP1 worksheet templates available from your instructor
+                </p>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Footer */}
+        <div className="text-center py-8 mt-8 border-t-4 border-emerald-500">
+          <p className="text-gray-600 mb-2">© 2025 Teaching Expo — Excel Masterclass</p>
+          <p className="text-sm text-gray-500">UMKB ICT Module | Instructor: Dr. Zineb Djihane Agli</p>
+          <p className="text-xs text-gray-400 mt-2">Designed for 500+ L1 English students</p>
         </div>
-
       </div>
-    </section>
-
-    <!-- Formula tester -->
-    <section id="formula-tester" class="card" aria-labelledby="h-tester">
-      <div class="module-header">
-        <div><h2 id="h-tester">Interactive Formula Tester</h2><p style="margin-top:6px">Quickly evaluate simple arithmetic or percent expressions to understand Excel results.</p></div>
-        <button class="toggle-btn" data-target="m-tester">Collapse</button>
-      </div>
-
-      <div id="m-tester" class="module-body">
-        <label for="expr"><strong>Enter expression</strong> (allowed: digits, + - * / ^ ( ) and %):</label>
-        <div class="tester">
-          <input id="expr" class="input" placeholder="Example: (100 + 50) * 10% + 20" aria-label="Expression input">
-          <button id="run" class="btn">Evaluate</button>
-          <button id="clear" class="btn secondary">Clear</button>
-        </div>
-        <div id="res" class="result" aria-live="polite" style="display:none"></div>
-
-        <p style="margin-top:10px;color:#475569">Professor note: this lightweight tester is for arithmetic experimentation. Use Excel for true function parity (dates, text functions, lookup behavior).</p>
-      </div>
-    </section>
-
-    <!-- Practical lab -->
-    <section id="lab" class="card" aria-labelledby="h-lab">
-      <div class="module-header">
-        <div><h2 id="h-lab">Practical Lab — TP1</h2><p style="margin-top:6px">Hands-on steps and evaluation criteria.</p></div>
-        <button class="toggle-btn" data-target="m-lab">Collapse</button>
-      </div>
-
-      <div id="m-lab" class="module-body">
-        <h3>Task</h3>
-        <ol>
-          <li>Create workbook named <em>TP Excel</em> with sheets: TP1, TP2, TP3, TP4.</li>
-          <li>On <strong>TP1</strong> create a 5×5 table with headers: Item, Qty, Unit price, Discount%, Net price.</li>
-          <li>Apply formatting: currency for prices, percentage for discount, conditional formatting for Net price &lt; 5.</li>
-          <li>Calculate totals using SUM, create a chart showing item vs net price.</li>
-        </ol>
-
-        <h3>Evaluation Rubric</h3>
-        <ul>
-          <li>Correct formulas and use of functions — 40%</li>
-          <li>Formatting & visualization quality — 30%</li>
-          <li>Data validation & robustness — 20%</li>
-          <li>Documentation & comments — 10%</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Resources -->
-    <section id="resources" class="card" aria-labelledby="h-resources">
-      <div class="module-header">
-        <div><h2 id="h-resources">Resources & Further Reading</h2><p style="margin-top:6px">Selected readings, cheatsheets and online references.</p></div>
-        <button class="toggle-btn" data-target="m-resources">Collapse</button>
-      </div>
-
-      <div id="m-resources" class="module-body">
-        <ul>
-          <li><a href="https://www.geeksforgeeks.org/excel/introduction-to-ms-excel/" target="_blank" rel="noopener">GeeksforGeeks — Introduction to MS Excel</a></li>
-          <li><a href="https://support.microsoft.com/excel" target="_blank" rel="noopener">Microsoft Office Support — Excel</a></li>
-          <li><a href="#" id="download-tp">Download TP1 worksheet (placeholder)</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- back -->
-    <div style="text-align:center;margin:20px 0 60px">
-      <a href="home.html" class="btn" style="text-decoration:none">← Back to Courses</a>
     </div>
-  </div>
-</div>
-
-<footer>
-  © 2025 Teaching Expo — Excel Masterclass · UMKB — Instructor: Dr. Zineb Agli
-</footer>
-
-<!-- INTERACTIVITY -->
-<script>
-  // Collapsible modules & TOC highlighting
-  document.querySelectorAll('.toggle-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const id = btn.getAttribute('data-target');
-      const body = document.getElementById(id);
-      if(!body) return;
-      const collapsed = body.classList.toggle('collapsed');
-      btn.textContent = collapsed ? 'Expand' : 'Collapse';
-    });
-  });
-
-  // Smooth scroll for TOC links
-  document.querySelectorAll('.toc a').forEach(a=>{
-    a.addEventListener('click', e=>{
-      e.preventDefault();
-      const href = a.getAttribute('href');
-      const el = document.querySelector(href);
-      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  });
-
-  // Copy buttons for examples
-  document.querySelectorAll('.copy-btn').forEach(b=>{
-    b.addEventListener('click', async ()=> {
-      const txt = b.getAttribute('data-copy') || b.previousElementSibling?.textContent || '';
-      try{
-        await navigator.clipboard.writeText(txt.trim());
-        b.textContent = 'Copied ✓';
-        setTimeout(()=> b.textContent = 'Copy',1200);
-      }catch(e){
-        alert('Copy failed — your browser may block clipboard access.');
-      }
-    });
-  });
-
-  // Formula tester (safe evaluator)
-  const exprIn = document.getElementById('expr');
-  const run = document.getElementById('run');
-  const clear = document.getElementById('clear');
-  const res = document.getElementById('res');
-
-  function sanitizeExpression(raw){
-    if(!raw || typeof raw !== 'string') return null;
-    // Allow digits, space, operators + - * / ^ ( ) and percent and decimal point
-    const allowed = /^[0-9+\-*/^().%\s,]+$/;
-    if(!allowed.test(raw)) return null;
-    // Convert commas to dot for decimals if user uses comma
-    let s = raw.replace(/,/g,'.');
-    // Replace percent: convert numbers followed by % into (n/100)
-    s = s.replace(/(\d+(\.\d+)?)\s*%/g, '($1/100)');
-    // Replace ^ with ** for JS exponentiation
-    s = s.replace(/\^/g, '**');
-    return s;
-  }
-
-  run.addEventListener('click', ()=>{
-    const raw = exprIn.value.trim();
-    const safe = sanitizeExpression(raw);
-    if(!safe){
-      res.style.display='block'; res.textContent = 'Expression invalid — only numbers and + - * / ^ ( ) % allowed.';
-      return;
-    }
-    try{
-      // eslint-disable-next-line no-new-func
-      const fn = new Function('return ('+safe+')');
-      const value = fn();
-      res.style.display='block';
-      res.textContent = 'Result: ' + (Number.isFinite(value) ? value : String(value));
-    }catch(e){
-      res.style.display='block';
-      res.textContent = 'Error evaluating expression: ' + e.message;
-    }
-  });
-
-  clear.addEventListener('click', ()=>{
-    exprIn.value=''; res.style.display='none';
-  });
-
-  // Highlight TOC based on scroll (simple)
-  const sections = Array.from(document.querySelectorAll('section[id]'));
-  function onScroll(){
-    const pos = window.scrollY + 120;
-    let active = sections.find(s => s.offsetTop <= pos && (s.offsetTop + s.offsetHeight) > pos);
-    if(!active) active = sections[0];
-    document.querySelectorAll('.toc a').forEach(a=> a.style.fontWeight='600');
-    if(active){
-      const link = document.querySelector('.toc a[href="#'+active.id+'"]');
-      if(link) link.style.fontWeight='900';
-    }
-  }
-  window.addEventListener('scroll', onScroll);
-  onScroll();
-
-  // Download placeholder TP1 (you can replace with actual file URL)
-  document.getElementById('download-tp').addEventListener('click', (e)=>{
-    e.preventDefault();
-    alert('TP1 download placeholder. I can generate a ready TP1 workbook (xlsx) and link it here if you want.');
-  });
-</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1090194600933033"
-     crossorigin="anonymous"></script>
-<!-- kind coffee cup -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1090194600933033"
-     data-ad-slot="8897864152"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</body>
-</html>
+  );
+}
