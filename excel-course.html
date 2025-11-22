@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Excel Masterclass - UMKB ICT Module for L1 English students">
+<title>Excel Masterclass - UMKB ICT Module</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #e0e7ff 100%);
+  color: #1f2937;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(90deg, #059669 0%, #0d9488 50%, #1d4ed8 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.header-mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.header-desktop {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.site-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.site-subtitle {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+
+.menu-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.mobile-menu {
+  display: none;
+  background: white;
+  color: #1f2937;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-nav {
+  padding: 1rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.nav-item:hover {
+  background: #f3f4f6;
+}
+
+.nav-item.active {
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 600;
+}
+
+/* Desktop Sidebar */
+.layout {
+  display: block;
+  padding: 1.5rem 0;
+}
+
+.sidebar {
+  display: none;
+}
+
+.main-content {
+  width: 100%;
+}
+
+/* Section Cards */
+.section-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #059669;
+  transition: all 0.3s;
+}
+
+.section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.toggle-btn:hover {
+  background: #f3f4f6;
+}
+
+.section-content {
+  margin-top: 1rem;
+}
+
+.section-content.collapsed {
+  display: none;
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.info-box {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-box li {
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.alert-box {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.alert-box p {
+  font-size: 0.875rem;
+  color: #78350f;
+}
+
+/* Tables */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+thead th {
+  background: #ea580c;
+  color: white;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+/* Formula Cards */
+.formula-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.formula-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.formula-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.formula-card h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.copy-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.copy-btn:hover {
+  background: white;
+}
+
+.formula-code {
+  background: #1e293b;
+  color: #10b981;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  overflow-x: auto;
+  margin-bottom: 0.5rem;
+}
+
+.formula-desc {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Formula Tester */
+.tester-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.tester-input:focus {
+  border-color: #0d9488;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: #0d9488;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0f766e;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+.result-box {
+  background: #ccfbf1;
+  border-left: 4px solid #0d9488;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  color: #115e59;
+}
+
+/* Rubric Grid */
+.rubric-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.rubric-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.rubric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.rubric-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.rubric-score {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.rubric-desc {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Links */
+.resource-link {
+  display: block;
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #c7d2fe;
+  transition: all 0.3s;
+}
+
+.resource-link:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.resource-link h3 {
+  color: #3730a3;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.resource-link p {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 4px solid #059669;
+  margin-top: 2rem;
+}
+
+.footer p {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .formula-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .rubric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .section-title {
+    font-size: 1.875rem;
+  }
+  
+  .section-card {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-mobile {
+    display: none;
+  }
+  
+  .header-desktop {
+    display: block;
+  }
+  
+  .desktop-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .desktop-subtitle {
+    font-size: 1.125rem;
+    opacity: 0.95;
+  }
+  
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+  
+  .sidebar {
+    display: block;
+    position: sticky;
+    top: 120px;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid #059669;
+  }
+  
+  .sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  
+  .sidebar h3 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+  
+  .formula-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Color classes */
+.bg-blue { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+.bg-emerald { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); }
+.bg-purple { background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%); }
+.bg-pink { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); }
+.bg-cyan { background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%); }
+.bg-teal { background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%); }
+.bg-rose { background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%); }
+.bg-violet { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+
+.text-blue { color: #1e3a8a; }
+.text-emerald { color: #065f46; }
+.text-purple { color: #581c87; }
+.text-pink { color: #831843; }
+.text-orange { color: #7c2d12; }
+.text-red { color: #7f1d1d; }
+.text-teal { color: #115e59; }
+.text-indigo { color: #312e81; }
+
+.border-emerald { border-left-color: #059669; }
+.border-blue { border-left-color: #2563eb; }
+.border-purple { border-left-color: #9333ea; }
+.border-pink { border-left-color: #ec4899; }
+.border-orange { border-left-color: #ea580c; }
+.border-red { border-left-color: #dc2626; }
+.border-teal { border-left-color: #0d9488; }
+.border-indigo { border-left-color: #4f46e5; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <!-- Mobile Header -->
+    <div class="header-mobile">
+      <div class="logo-section">
+        <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <div>
+          <div class="site-title">Excel Masterclass</div>
+          <div class="site-subtitle">UMKB ICT</div>
+        </div>
+      </div>
+      <button class="menu-btn" id="menuToggle">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <path id="closeIcon" style="display:none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Desktop Header -->
+    <div class="header-desktop">
+      <svg style="width:4rem;height:4rem;margin:0 auto 1rem;display:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+      <h1 class="desktop-title">Excel — Masterclass</h1>
+      <p class="desktop-subtitle"><strong>Instructor:</strong> Zineb Djihane Agli</p>
+      <p style="font-size:0.875rem;opacity:0.9;margin-top:0.5rem">UMKB ICT Module | L1 English</p>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+      <div class="mobile-nav" id="mobileNav"></div>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Layout -->
+<div class="container">
+  <div class="layout">
+    
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <h3>Contents</h3>
+      <div id="desktopNav"></div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Introduction -->
+      <section id="intro" class="section-card border-emerald">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+              Introduction & Interface
+            </h2>
+            <p class="section-desc">Master Excel workspace fundamentals</p>
+          </div>
+          <button class="toggle-btn" data-target="intro-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="intro-content" class="section-content">
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🎯 Key Elements</h3>
+              <ul>
+                <li><strong>Ribbon:</strong> Tabs with tools (Home, Insert, Data)</li>
+                <li><strong>Quick Access:</strong> Save, Undo, Redo shortcuts</li>
+                <li><strong>Formula Bar:</strong> View/edit cell contents</li>
+                <li><strong>Status Bar:</strong> Quick calculations</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">📝 Cell References</h3>
+              <ul>
+                <li><strong>Columns:</strong> A, B, C...Z, AA, AB</li>
+                <li><strong>Rows:</strong> 1, 2, 3...1,048,576</li>
+                <li><strong>Cells:</strong> A1, B2, Z100</li>
+                <li><strong>Ranges:</strong> A1:B10</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <p><strong>💡 Teacher Tip:</strong> Always check the formula bar when evaluating student work. What appears in the cell may be formatted differently from the actual stored value.</p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>A</th>
+                  <th>B</th>
+                  <th>C</th>
+                  <th>D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Item</td>
+                  <td>Qty</td>
+                  <td>Price</td>
+                  <td>Total</td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td>Notebook</td>
+                  <td>3</td>
+                  <td>6.50</td>
+                  <td>=B2*C2</td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td>Pen</td>
+                  <td>10</td>
+                  <td>0.75</td>
+                  <td>=B3*C3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Workbooks -->
+      <section id="workbooks" class="section-card border-blue">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              Workbooks & Worksheets
+            </h2>
+            <p class="section-desc">Organize multiple sheets effectively</p>
+          </div>
+          <button class="toggle-btn" data-target="workbooks-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="workbooks-content" class="section-content">
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🗂️ Best Practices</h3>
+              <ul>
+                <li>✅ Separate data from calculations</li>
+                <li>✅ Use index sheet for navigation</li>
+                <li>✅ Lock formulas with protection</li>
+                <li>✅ Version files (grades_v1.xlsx)</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">📚 Organization</h3>
+              <ul>
+                <li>📊 Sheet 1: Raw data</li>
+                <li>🔧 Sheet 2: Calculations</li>
+                <li>📈 Sheet 3: Charts</li>
+                <li>📝 Sheet 4: Documentation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Management -->
+      <section id="data" class="section-card border-purple">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+              Data Management
+            </h2>
+            <p class="section-desc">Foundation of reliable analysis</p>
+          </div>
+          <button class="toggle-btn" data-target="data-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="data-content" class="section-content">
+          <div class="info-box bg-purple">
+            <h3 class="text-purple">🎯 Cleaning Workflow</h3>
+            <ol style="list-style-position:inside">
+              <li>Keep original raw data tab</li>
+              <li>Create cleaned copy</li>
+              <li>Remove blanks, trim spaces</li>
+              <li>Normalize formats</li>
+              <li>Document assumptions</li>
+            </ol>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">✨ Smart Features</h3>
+              <ul>
+                <li>• Data Validation (lists, ranges)</li>
+                <li>• Flash Fill (pattern recognition)</li>
+                <li>• Tables (structured references)</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">🔍 Quality Checks</h3>
+              <ul>
+                <li>• Check for duplicates</li>
+                <li>• Verify data types</li>
+                <li>• Look for outliers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formatting -->
+      <section id="formatting" class="section-card border-pink">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
+              Formatting & Visualization
+            </h2>
+            <p class="section-desc">Transform numbers into insights</p>
+          </div>
+          <button class="toggle-btn" data-target="formatting-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="formatting-content" class="section-content">
+          <div class="grid-3">
+            <div class="info-box bg-pink">
+              <h3 class="text-pink">💰 Numbers</h3>
+              <ul>
+                <li>Currency: $1,234.56</li>
+                <li>Percent: 45.2%</li>
+                <li>Custom: 0.0,"M"</li>
+              </ul>
+            </div>
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🎨 Conditional</h3>
+              <ul>
+                <li>Color scales</li>
+                <li>Data bars</li>
+                <li>Icon sets</li>
+              </ul>
+            </div>
+            <div class="info-box bg-purple">
+              <h3 class="text-purple">📊 Charts</h3>
+              <ul>
+                <li>Line: Trends</li>
+                <li>Column: Compare</li>
+                <li>Pie: Parts</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <p><strong>🎯 Clarity First:</strong> Choose accessible colors and annotate charts with sources</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulas -->
+      <section id="formulas" class="section-card border-orange">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              Formulas & Functions
+            </h2>
+            <p class="section-desc">Master Excel calculations</p>
+          </div>
+          <button class="toggle-btn" data-target="formulas-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="formulas-content" class="section-content">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Operation</th>
+                  <th style="text-align:center">Symbol</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Addition</td>
+                  <td style="text-align:center;font-weight:700;font-size:1.25rem">+</td>
+                  <td style="font-family:monospace">=A1 + B1</td>
+                </tr>
+                <tr>
+                  <td>Subtraction</td>
+                  <td style="text-align:center;font-weight:700;font-size:1.25rem">-</td>
+                  <td style="font-family:monospace">=A1 - B1</td>
+                </tr>
+                <tr>
+                  <td>Multiplication</td>
+                  <td style="text-align:center;font-weight:700;font-size:1.25rem">*</td>
+                  <td style="font-family:monospace">=A1 * B1</td>
+                </tr>
+                <tr>
+                  <td>Division</td>
+                  <td style="text-align:center;font-weight:700;font-size:1.25rem">/</td>
+                  <td style="font-family:monospace">=A1 / B1</td>
+                </tr>
+                <tr>
+                  <td>Exponent</td>
+                  <td style="text-align:center;font-weight:700;font-size:1.25rem">^</td>
+                  <td style="font-family:monospace">=A1 ^ 2</td>
+                </tr>
+                <tr>
+                  <td>Percentage</td>
+                  <td style="text-align:center;font-weight:700;font-size:1.25rem">%</td>
+                  <td style="font-family:monospace">=A1 * 10%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="formula-grid" id="formulaGrid">
+            <!-- Formulas will be inserted here by JavaScript -->
+          </div>
+
+          <div class="info-box bg-blue">
+            <h3 class="text-blue">💡 Pro Tips</h3>
+            <ul>
+              <li>✓ Use parentheses to control calculation order</li>
+              <li>✓ Name your ranges for clearer formulas</li>
+              <li>✓ Build complex formulas step-by-step</li>
+              <li>✓ Add comments to explain your logic</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formula Tester -->
+      <section id="tester" class="section-card border-teal" style="background:linear-gradient(135deg,#ccfbf1 0%,#99f6e4 100%)">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              Interactive Formula Tester
+            </h2>
+            <p class="section-desc">Practice calculations in real-time</p>
+          </div>
+        </div>
+
+        <div class="section-content">
+          <label for="expressionInput" style="display:block;margin-bottom:0.5rem;font-weight:600">
+            Enter expression (numbers, +, -, *, /, ^, %, parentheses):
+          </label>
+          <input 
+            type="text" 
+            id="expressionInput" 
+            class="tester-input" 
+            placeholder="Example: (100 + 50) * 10% + 20"
+          >
+          
+          <div class="button-group">
+            <button class="btn btn-primary" id="calculateBtn">Calculate</button>
+            <button class="btn btn-secondary" id="clearBtn">Clear</button>
+          </div>
+
+          <div id="resultBox" class="result-box" style="display:none"></div>
+
+          <div class="info-box bg-blue" style="margin-top:1rem">
+            <p style="font-size:0.875rem"><strong>Note:</strong> This tester is for arithmetic practice. For full Excel functions (VLOOKUP, IF, etc.), use Excel directly.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Practical Lab -->
+      <section id="lab" class="section-card border-red">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+              Practical Lab — TP1
+            </h2>
+            <p class="section-desc">Hands-on assignment</p>
+          </div>
+          <button class="toggle-btn" data-target="lab-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="lab-content" class="section-content">
+          <div class="info-box bg-rose">
+            <h3 class="text-red">📋 Assignment Tasks</h3>
+            <ol style="list-style-position:inside;padding-left:0">
+              <li>Create workbook: <em>TP Excel</em> (sheets: TP1-4)</li>
+              <li>Build 5×5 table with proper headers</li>
+              <li>Apply formatting (currency, percent)</li>
+              <li>Use conditional formatting</li>
+              <li>Create chart with SUM totals</li>
+            </ol>
+          </div>
+
+          <div style="background:linear-gradient(135deg,#fce7f3 0%,#fbcfe8 100%);padding:1.25rem;border-radius:0.75rem;margin-top:1rem">
+            <h3 style="font-weight:600;margin-bottom:1rem">📊 Evaluation Rubric</h3>
+            
+            <div class="rubric-grid">
+              <div class="rubric-card">
+                <div class="rubric-header">
+                  <span class="rubric-label">Formulas & Functions</span>
+                  <span class="rubric-score" style="color:#9333ea">40%</span>
+                </div>
+                <p class="rubric-desc">Correct calculations</p>
+              </div>
+
+              <div class="rubric-card">
+                <div class="rubric-header">
+                  <span class="rubric-label">Formatting</span>
+                  <span class="rubric-score" style="color:#ec4899">30%</span>
+                </div>
+                <p class="rubric-desc">Visual quality</p>
+              </div>
+
+              <div class="rubric-card">
+                <div class="rubric-header">
+                  <span class="rubric-label">Validation</span>
+                  <span class="rubric-score" style="color:#2563eb">20%</span>
+                </div>
+                <p class="rubric-desc">Robustness</p>
+              </div>
+
+              <div class="rubric-card">
+                <div class="rubric-header">
+                  <span class="rubric-label">Documentation</span>
+                  <span class="rubric-score" style="color:#059669">10%</span>
+                </div>
+                <p class="rubric-desc">Comments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resources -->
+      <section id="resources" class="section-card border-indigo">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+              Resources & Further Reading
+            </h2>
+            <p class="section-desc">Essential links</p>
+          </div>
+          <button class="toggle-btn" data-target="resources-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="resources-content" class="section-content">
+          <a href="https://www.geeksforgeeks.org/excel/introduction-to-ms-excel/" target="_blank" rel="noopener noreferrer" class="resource-link">
+            <h3>GeeksforGeeks — Excel Introduction</h3>
+            <p>Comprehensive beginner tutorials</p>
+          </a>
+
+          <a href="https://support.microsoft.com/excel" target="_blank" rel="noopener noreferrer" class="resource-link">
+            <h3>Microsoft Excel Support</h3>
+            <p>Official documentation and help</p>
+          </a>
+
+          <div class="alert-box">
+            <p><strong>📥 Download Materials:</strong> TP1 worksheet templates available from your instructor</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>© 2025 Excel Masterclass — Teaching Expo</p>
+        <p>UMKB ICT Module | Instructor: Dr. Zineb Djihane Agli</p>
+        <p style="font-size:0.75rem;color:#9ca3af;margin-top:0.5rem">Designed for 500+ L1 English students</p>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+// Navigation items
+const navItems = [
+  { id: 'intro', label: 'Introduction', icon: '📚' },
+  { id: 'workbooks', label: 'Workbooks', icon: '📁' },
+  { id: 'data', label: 'Data Management', icon: '💾' },
+  { id: 'formatting', label: 'Formatting', icon: '🎨' },
+  { id: 'formulas', label: 'Formulas', icon: '🧮' },
+  { id: 'lab', label: 'Practical Lab', icon: '💡' },
+  { id: 'tester', label: 'Formula Tester', icon: '🔢' },
+  { id: 'resources', label: 'Resources', icon: '📖' }
+];
+
+// Formula examples
+const formulas = [
+  { name: 'Basic Sum', code: '=SUM(A1:A10)', desc: 'Add range of cells' },
+  { name: 'Average', code: '=AVERAGE(B1:B20)', desc: 'Calculate mean' },
+  { name: 'IF Statement', code: '=IF(A1>100, "High", "Low")', desc: 'Conditional logic' },
+  { name: 'VLOOKUP', code: '=VLOOKUP(E2, A2:B10, 2, FALSE)', desc: 'Vertical lookup' },
+  { name: 'Tax Calc', code: '=B2 * 0.17', desc: '17% tax calculation' },
+  { name: 'Percentage', code: '=A1 * 10%', desc: '10% of value' }
+];
+
+// Build navigation
+function buildNav(containerId, isMobile) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  navItems.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-item';
+    btn.innerHTML = `
+      <span style="font-size:1.25rem">${item.icon}</span>
+      <span>${item.label}</span>
+    `;
+    btn.onclick = () => scrollToSection(item.id, isMobile);
+    container.appendChild(btn);
+  });
+}
+
+// Scroll to section
+function scrollToSection(id, closeMobileMenu) {
+  const element = document.getElementById(id);
+  if (element) {
+    const offset = window.innerWidth < 1024 ? 80 : 20;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+    
+    if (closeMobileMenu) {
+      toggleMobileMenu();
+    }
+    
+    updateActiveNav(id);
+  }
+}
+
+// Update active navigation
+function updateActiveNav(activeId) {
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  document.querySelectorAll('.nav-item').forEach(item => {
+    if (item.textContent.includes(navItems.find(n => n.id === activeId)?.label)) {
+      item.classList.add('active');
+    }
+  });
+}
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+  const closeIcon = document.getElementById('closeIcon');
+  
+  menu.classList.toggle('active');
+  
+  if (menu.classList.contains('active')) {
+    menuIcon.style.display = 'none';
+    closeIcon.style.display = 'block';
+  } else {
+    menuIcon.style.display = 'block';
+    closeIcon.style.display = 'none';
+  }
+}
+
+// Toggle section content
+function setupToggleButtons() {
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.onclick = function() {
+      const targetId = this.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      
+      if (content) {
+        content.classList.toggle('collapsed');
+        
+        // Rotate arrow
+        const svg = this.querySelector('svg');
+        if (content.classList.contains('collapsed')) {
+          svg.style.transform = 'rotate(-90deg)';
+        } else {
+          svg.style.transform = 'rotate(0deg)';
+        }
+      }
+    };
+  });
+}
+
+// Build formula cards
+function buildFormulaCards() {
+  const grid = document.getElementById('formulaGrid');
+  if (!grid) return;
+  
+  formulas.forEach((formula, index) => {
+    const card = document.createElement('div');
+    card.className = 'formula-card';
+    card.innerHTML = `
+      <div class="formula-card-header">
+        <h4>${formula.name}</h4>
+        <button class="copy-btn" data-formula="${formula.code}" data-index="${index}">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="formula-code">${formula.code}</div>
+      <p class="formula-desc">${formula.desc}</p>
+    `;
+    grid.appendChild(card);
+  });
+  
+  // Add copy functionality
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.onclick = function() {
+      const formula = this.getAttribute('data-formula');
+      copyToClipboard(formula, this);
+    };
+  });
+}
+
+// Copy to clipboard
+function copyToClipboard(text, button) {
+  navigator.clipboard.writeText(text).then(() => {
+    const originalHTML = button.innerHTML;
+    button.innerHTML = `
+      <svg width="16" height="16" fill="none" stroke="#059669" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    `;
+    
+    setTimeout(() => {
+      button.innerHTML = originalHTML;
+    }, 2000);
+  }).catch(err => {
+    alert('Copy failed');
+  });
+}
+
+// Formula tester
+function setupFormulaTester() {
+  const input = document.getElementById('expressionInput');
+  const calculateBtn = document.getElementById('calculateBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const resultBox = document.getElementById('resultBox');
+  
+  function evaluateExpression() {
+    const expression = input.value.trim();
+    
+    if (!expression) {
+      resultBox.textContent = 'Please enter an expression';
+      resultBox.style.display = 'block';
+      return;
+    }
+    
+    try {
+      // Sanitize expression
+      let safe = expression.replace(/,/g, '.');
+      safe = safe.replace(/(\d+(\.\d+)?)\s*%/g, '($1/100)');
+      safe = safe.replace(/\^/g, '**');
+      
+      // Validate
+      if (!/^[0-9+\-*/^().%\s,]+$/.test(expression)) {
+        resultBox.textContent = 'Invalid expression - use only numbers and + - * / ^ ( ) %';
+        resultBox.style.display = 'block';
+        return;
+      }
+      
+      // Evaluate
+      const result = Function('"use strict"; return (' + safe + ')')();
+      
+      resultBox.textContent = `Result: ${Number.isFinite(result) ? result.toFixed(4) : String(result)}`;
+      resultBox.style.display = 'block';
+      resultBox.style.background = '#ccfbf1';
+      resultBox.style.borderColor = '#0d9488';
+      resultBox.style.color = '#115e59';
+    } catch (e) {
+      resultBox.textContent = `Error: ${e.message}`;
+      resultBox.style.display = 'block';
+      resultBox.style.background = '#fee2e2';
+      resultBox.style.borderColor = '#dc2626';
+      resultBox.style.color = '#7f1d1d';
+    }
+  }
+  
+  calculateBtn.onclick = evaluateExpression;
+  clearBtn.onclick = () => {
+    input.value = '';
+    resultBox.style.display = 'none';
+  };
+  
+  input.onkeypress = (e) => {
+    if (e.key === 'Enter') evaluateExpression();
+  };
+}
+
+// Scroll spy
+function setupScrollSpy() {
+  window.addEventListener('scroll', () => {
+    const sections = navItems.map(item => item.id);
+    
+    for (const id of sections) {
+      const element = document.getElementById(id);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          updateActiveNav(id);
+          break;
+        }
+      }
+    }
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  // Build navigations
+  buildNav('mobileNav', true);
+  buildNav('desktopNav', false);
+  
+  // Setup functionality
+  setupToggleButtons();
+  buildFormulaCards();
+  setupFormulaTester();
+  setupScrollSpy();
+  
+  // Mobile menu toggle
+  document.getElementById('menuToggle').onclick = toggleMobileMenu;
+  
+  // Set initial active nav
+  updateActiveNav('intro');
+});
+</script>
+
+</body>
+</html>="intro-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="intro-content" class="section-content">
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🎯 Key Elements</h3>
+              <ul>
+                <li><strong>Ribbon:</strong> Tabs with tools (Home, Insert, Data)</li>
+                <li><strong>Quick Access:</strong> Save, Undo, Redo shortcuts</li>
+                <li><strong>Formula Bar:</strong> View/edit cell contents</li>
+                <li><strong>Status Bar:</strong> Quick calculations</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">📝 Cell References</h3>
+              <ul>
+                <li><strong>Columns:</strong> A, B, C...Z, AA, AB</li>
+                <li><strong>Rows:</strong> 1, 2, 3...1,048,576</li>
+                <li><strong>Cells:</strong> A1, B2, Z100</li>
+                <li><strong>Ranges:</strong> A1:B10</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert-box">
+            <p><strong>💡 Teacher Tip:</strong> Always check the formula bar when evaluating student work. What appears in the cell may be formatted differently from the actual stored value.</p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>A</th>
+                  <th>B</th>
+                  <th>C</th>
+                  <th>D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Item</td>
+                  <td>Qty</td>
+                  <td>Price</td>
+                  <td>Total</td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td>Notebook</td>
+                  <td>3</td>
+                  <td>6.50</td>
+                  <td>=B2*C2</td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td>Pen</td>
+                  <td>10</td>
+                  <td>0.75</td>
+                  <td>=B3*C3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Workbooks -->
+      <section id="workbooks" class="section-card border-blue">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              Workbooks & Worksheets
+            </h2>
+            <p class="section-desc">Organize multiple sheets effectively</p>
+          </div>
+          <button class="toggle-btn" data-target="workbooks-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="workbooks-content" class="section-content">
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">🗂️ Best Practices</h3>
+              <ul>
+                <li>✅ Separate data from calculations</li>
+                <li>✅ Use index sheet for navigation</li>
+                <li>✅ Lock formulas with protection</li>
+                <li>✅ Version files (grades_v1.xlsx)</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">📚 Organization</h3>
+              <ul>
+                <li>📊 Sheet 1: Raw data</li>
+                <li>🔧 Sheet 2: Calculations</li>
+                <li>📈 Sheet 3: Charts</li>
+                <li>📝 Sheet 4: Documentation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Management -->
+      <section id="data" class="section-card border-purple">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+              Data Management
+            </h2>
+            <p class="section-desc">Foundation of reliable analysis</p>
+          </div>
+          <button class="toggle-btn" data-target="data-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="data-content" class="section-content">
+          <div class="info-box bg-purple">
+            <h3 class="text-purple">🎯 Cleaning Workflow</h3>
+            <ol style="list-style-position:inside">
+              <li>Keep original raw data tab</li>
+              <li>Create cleaned copy</li>
+              <li>Remove blanks, trim spaces</li>
+              <li>Normalize formats</li>
+              <li>Document assumptions</li>
+            </ol>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-box bg-blue">
+              <h3 class="text-blue">✨ Smart Features</h3>
+              <ul>
+                <li>• Data Validation (lists, ranges)</li>
+                <li>• Flash Fill (pattern recognition)</li>
+                <li>• Tables (structured references)</li>
+              </ul>
+            </div>
+            <div class="info-box bg-emerald">
+              <h3 class="text-emerald">🔍 Quality Checks</h3>
+              <ul>
+                <li>• Check for duplicates</li>
+                <li>• Verify data types</li>
+                <li>• Look for outliers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formatting -->
+      <section id="formatting" class="section-card border-pink">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
+              Formatting & Visualization
+            </h2>
+            <p class="section-desc">Transform numbers into insights</p>
+          </div>
+          <button class="toggle-btn" data-target
