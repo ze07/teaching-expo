@@ -782,6 +782,571 @@ tbody tr:nth-child(even) {
         </div>
       </section>
 
+      <!-- Practice Exercises Section -->
+      <section id="exercises" class="section-card border-orange">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+              </svg>
+              Intermediate Exercises
+            </h2>
+            <p class="section-desc">Detailed practice exercises to master intermediate skills</p>
+          </div>
+          <button class="toggle-btn" data-target="exercises-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="exercises-content" class="section-content">
+
+          <!-- Exercise 1 -->
+          <div style="background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #f59e0b">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#92400e">Exercise 1 – Sorting & Filtering</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>Name</th><th>Section</th><th>Mark</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Sara</td><td>A</td><td>12</td></tr>
+                    <tr><td>Adam</td><td>C</td><td>9</td></tr>
+                    <tr><td>Lina</td><td>A</td><td>16</td></tr>
+                    <tr><td>Karim</td><td>B</td><td>8</td></tr>
+                    <tr><td>Yara</td><td>C</td><td>14</td></tr>
+                    <tr><td>Bilal</td><td>B</td><td>11</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Sort the data by Mark (Highest → Lowest)</li>
+                <li>Sort by Section (A→C), then by Name</li>
+                <li>Filter only students with marks 10 or above</li>
+                <li>Filter only students in Section A</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Exercise 2 -->
+          <div style="background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #2563eb">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#1e40af">Exercise 2 – Relative & Absolute Referencing</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>Item</th><th>Price</th><th>Quantity</th><th>VAT (19%)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Pen</td><td>20</td><td>3</td><td>0.19</td></tr>
+                    <tr><td>Notebook</td><td>90</td><td>1</td><td></td></tr>
+                    <tr><td>Bag</td><td>350</td><td>2</td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Calculate Total = Price × Quantity using relative references</li>
+                <li>Calculate Total with VAT using absolute reference $D$2</li>
+              </ol>
+              <div style="margin-top:0.75rem;padding:0.75rem;background:#f0f9ff;border-radius:0.25rem">
+                <p style="font-size:0.75rem;color:#0c4a6e"><strong>Hint:</strong> Use <code>=B2*C2</code> for Total, then <code>=B2*C2*(1+$D$2)</code> for Total with VAT</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 3 -->
+          <div style="background:linear-gradient(135deg,#e9d5ff 0%,#d8b4fe 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #9333ea">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#6b21a8">Exercise 3 – COUNT, COUNTA, COUNTIF</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>Student</th><th>Mark</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Amina</td><td>15</td></tr>
+                    <tr><td>Sami</td><td>9</td></tr>
+                    <tr><td>Youcef</td><td>13</td></tr>
+                    <tr><td>Salma</td><td>7</td></tr>
+                    <tr><td>Nada</td><td>11</td></tr>
+                    <tr><td>Rani</td><td>(blank)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Use COUNT to count numeric marks</li>
+                <li>Use COUNTA to count all student names</li>
+                <li>Use COUNTIF to count passes (≥10)</li>
+                <li>Use COUNTIF to count fails (<10)</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Exercise 4 -->
+          <div style="background:linear-gradient(135deg,#d1fae5 0%,#a7f3d0 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #059669">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#065f46">Exercise 4 – SUMIF</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>Product</th><th>Category</th><th>Sales</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Mouse</td><td>Electronics</td><td>1200</td></tr>
+                    <tr><td>USB</td><td>Electronics</td><td>700</td></tr>
+                    <tr><td>Pen</td><td>Stationery</td><td>200</td></tr>
+                    <tr><td>Notebook</td><td>Stationery</td><td>450</td></tr>
+                    <tr><td>Charger</td><td>Electronics</td><td>900</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>SUMIF Electronics sales</li>
+                <li>SUMIF Stationery sales</li>
+                <li>Determine the highest-selling category</li>
+              </ol>
+              <div style="margin-top:0.75rem;padding:0.75rem;background:#ecfdf5;border-radius:0.25rem">
+                <p style="font-size:0.75rem;color:#065f46"><strong>Hint:</strong> <code>=SUMIF(B:B,"Electronics",C:C)</code></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 5 -->
+          <div style="background:linear-gradient(135deg,#fce7f3 0%,#fbcfe8 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #ec4899">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#9f1239">Exercise 5 – VLOOKUP</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data Table:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>ID</th><th>Name</th><th>Section</th><th>Mark</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>101</td><td>Mariam</td><td>B</td><td>14</td></tr>
+                    <tr><td>102</td><td>Fouad</td><td>A</td><td>11</td></tr>
+                    <tr><td>103</td><td>Selma</td><td>C</td><td>9</td></tr>
+                    <tr><td>104</td><td>Rachid</td><td>B</td><td>16</td></tr>
+                    <tr><td>105</td><td>Aya</td><td>A</td><td>13</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Use VLOOKUP to return a student name from an ID</li>
+                <li>Use VLOOKUP to return a student's mark</li>
+                <li>Use IF + VLOOKUP to show Pass/Fail</li>
+              </ol>
+              <div style="margin-top:0.75rem;padding:0.75rem;background:#fdf2f8;border-radius:0.25rem">
+                <p style="font-size:0.75rem;color:#9f1239"><strong>Hint:</strong> <code>=VLOOKUP(101,A:D,2,FALSE)</code> returns name</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 6 -->
+          <div style="background:linear-gradient(135deg,#fed7aa 0%,#fdba74 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #ea580c">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#7c2d12">Exercise 6 – Conditional Formatting</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Highlight marks ≥15 in green</li>
+                <li>Highlight marks <10 in red</li>
+                <li>Add icon sets (arrows or traffic lights)</li>
+              </ol>
+              <div style="margin-top:0.75rem;padding:0.75rem;background:#fff7ed;border-radius:0.25rem">
+                <p style="font-size:0.75rem;color:#7c2d12"><strong>Path:</strong> Home → Conditional Formatting → Highlight Cells Rules</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 7 -->
+          <div style="background:linear-gradient(135deg,#ccfbf1 0%,#99f6e4 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #0d9488">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#115e59">Exercise 7 – Data Cleaning</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>Name</th><th>Phone</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>SALMA</td><td>0551-22-33-44</td></tr>
+                    <tr><td>ahmed</td><td>0661228844</td></tr>
+                    <tr><td>Lina</td><td>0770 330 221</td></tr>
+                    <tr><td>fatma</td><td>0551223344</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Use TRIM to remove extra spaces</li>
+                <li>Use PROPER to fix names (correct capitalization)</li>
+                <li>Use SUBSTITUTE to clean phone numbers (remove - and spaces)</li>
+                <li>Remove duplicates if they appear</li>
+              </ol>
+              <div style="margin-top:0.75rem;padding:0.75rem;background:#f0fdfa;border-radius:0.25rem">
+                <p style="font-size:0.75rem;color:#115e59"><strong>Example:</strong> <code>=PROPER(A2)</code> converts "ahmed" to "Ahmed"</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 8 -->
+          <div style="background:linear-gradient(135deg,#e0e7ff 0%,#c7d2fe 100%);padding:1.5rem;border-radius:1rem;margin-bottom:1.5rem;border-left:4px solid #4f46e5">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#3730a3">Exercise 8 – Charts</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Data:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>Month</th><th>Expense</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Jan</td><td>300</td></tr>
+                    <tr><td>Feb</td><td>250</td></tr>
+                    <tr><td>Mar</td><td>420</td></tr>
+                    <tr><td>Apr</td><td>380</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✏️ Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Insert column chart</li>
+                <li>Add title and labels</li>
+                <li>Format bars with custom colors</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Exercise 9 - Final Project -->
+          <div style="background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%);padding:1.5rem;border-radius:1rem;border:3px solid #dc2626">
+            <h3 style="font-size:1.5rem;font-weight:700;margin-bottom:1rem;color:#7f1d1d">🎯 Exercise 9 – Final Project</h3>
+            
+            <div style="background:white;padding:1rem;border-radius:0.5rem;margin-bottom:1rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">📊 Complete Dataset:</h4>
+              <div class="table-wrapper">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr><th>ID</th><th>Name</th><th>Section</th><th>Mark</th><th>Absences</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td>Nabil</td><td>A</td><td>14</td><td>2</td></tr>
+                    <tr><td>2</td><td>Hana</td><td>B</td><td>9</td><td>4</td></tr>
+                    <tr><td>3</td><td>Salma</td><td>A</td><td>12</td><td>1</td></tr>
+                    <tr><td>4</td><td>Rami</td><td>C</td><td>7</td><td>5</td></tr>
+                    <tr><td>5</td><td>Lina</td><td>B</td><td>16</td><td>0</td></tr>
+                    <tr><td>6</td><td>Yasser</td><td>C</td><td>13</td><td>3</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem;color:#dc2626">✏️ Complete All Tasks:</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Sort marks highest to lowest</li>
+                <li>Filter only Section B students</li>
+                <li>Use COUNTIF to count number of passes (≥10)</li>
+                <li>Use SUMIF to total marks for Section A</li>
+                <li>Use VLOOKUP to find mark by ID</li>
+                <li>Apply conditional formatting (green for ≥15, red for <10)</li>
+                <li>Create a column chart showing student marks</li>
+              </ol>
+            </div>
+
+            <div style="background:#7f1d1d;color:white;padding:1rem;border-radius:0.5rem;margin-top:1rem">
+              <p style="font-weight:600;margin-bottom:0.5rem">🏆 Completion Checklist:</p>
+              <ul style="font-size:0.875rem;line-height:1.8">
+                <li>☐ All 7 tasks completed</li>
+                <li>☐ Formulas working correctly</li>
+                <li>☐ Professional formatting applied</li>
+                <li>☐ Chart properly labeled</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Formula Tester -->
+      <section id="tester" class="section-card border-teal" style="background:linear-gradient(135deg,#ccfbf1 0%,#99f6e4 100%)">
+
+      <!-- Intermediate Skills Section -->
+      <section id="intermediate" class="section-card border-indigo">
+        <div class="section-header">
+          <div style="flex:1">
+            <h2 class="section-title">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+              </svg>
+              Intermediate Skills
+            </h2>
+            <p class="section-desc">Sorting, Filtering, Conditional Formatting & Advanced Functions</p>
+          </div>
+          <button class="toggle-btn" data-target="intermediate-content">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="intermediate-content" class="section-content">
+          
+          <!-- Learning Objectives -->
+          <div class="info-box bg-indigo" style="margin-bottom:1.5rem">
+            <h3 class="text-indigo">🎯 Learning Objectives</h3>
+            <ul>
+              <li>Sort and filter data to analyze information effectively</li>
+              <li>Apply conditional formatting rules to highlight patterns</li>
+              <li>Understand relative vs absolute cell references</li>
+              <li>Use important functions like MIN, MAX, COUNT, and IF</li>
+              <li>Create well-formatted charts and summaries</li>
+            </ul>
+          </div>
+
+          <!-- Sorting Data -->
+          <div style="margin-bottom:1.5rem">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;color:#4f46e5">📑 Sorting Data</h3>
+            <p style="margin-bottom:1rem">Sorting helps organize data in ascending or descending order. It is essential for analysis.</p>
+            
+            <div class="info-box bg-blue">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">🔹 Types of Sorting</h4>
+              <ul>
+                <li>Sort A → Z (alphabetical)</li>
+                <li>Sort Z → A</li>
+                <li>Sort smallest → largest</li>
+                <li>Sort largest → smallest</li>
+              </ul>
+            </div>
+
+            <div style="background:#f8fafc;padding:1rem;border-radius:0.5rem;margin-top:1rem;border-left:3px solid #4f46e5">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">📌 Example</h4>
+              <div style="overflow-x:auto">
+                <table style="font-size:0.875rem">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Group</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Sara</td><td>1</td><td>15</td></tr>
+                    <tr><td>Ali</td><td>2</td><td>12</td></tr>
+                    <tr><td>Lina</td><td>1</td><td>18</td></tr>
+                    <tr><td>Omar</td><td>3</td><td>11</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p style="margin-top:0.75rem"><strong>Task:</strong> Sort these students by Score (highest → lowest).</p>
+            </div>
+          </div>
+
+          <!-- Filtering -->
+          <div style="margin-bottom:1.5rem">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;color:#4f46e5">🔍 Filtering Data</h3>
+            <p style="margin-bottom:1rem">Filters help display only the data that meets your criteria.</p>
+            
+            <div class="grid-2">
+              <div class="info-box bg-cyan">
+                <h4 style="font-weight:600;margin-bottom:0.5rem">🔹 Common Filters</h4>
+                <ul style="font-size:0.875rem">
+                  <li>Filter by text (begins with, contains...)</li>
+                  <li>Filter by number (greater than, equal to...)</li>
+                  <li>Filter by specific group or category</li>
+                </ul>
+              </div>
+
+              <div class="info-box bg-emerald">
+                <h4 style="font-weight:600;margin-bottom:0.5rem">📌 Example Tasks</h4>
+                <ul style="font-size:0.875rem">
+                  <li>Show only Group 1 students</li>
+                  <li>Show scores ≥ 14</li>
+                  <li>Show names starting with "A"</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conditional Formatting -->
+          <div style="margin-bottom:1.5rem">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;color:#4f46e5">🎨 Conditional Formatting</h3>
+            <p style="margin-bottom:1rem">Conditional formatting highlights patterns, trends, and important data automatically.</p>
+            
+            <div class="info-box bg-pink">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✨ Useful Rules</h4>
+              <ul>
+                <li>Highlight cells greater than a number</li>
+                <li>Highlight duplicates</li>
+                <li>Color scales (green→yellow→red)</li>
+                <li>Icon sets (arrows / flags)</li>
+              </ul>
+            </div>
+
+            <div class="alert-box" style="margin-top:1rem">
+              <p><strong>📘 Exercise:</strong> Highlight all Final Exam scores lower than 12 in red.</p>
+            </div>
+          </div>
+
+          <!-- Cell References -->
+          <div style="margin-bottom:1.5rem">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;color:#4f46e5">📌 Relative vs Absolute Cell References</h3>
+            
+            <div class="grid-2">
+              <div class="info-box bg-blue">
+                <h4 style="font-weight:600;margin-bottom:0.5rem">📍 Relative (A1)</h4>
+                <p style="font-size:0.875rem">Changes when copied down or across.</p>
+                <div style="background:#1e293b;color:#10b981;padding:0.5rem;border-radius:0.25rem;margin-top:0.5rem;font-family:monospace;font-size:0.75rem">=B2 * C2</div>
+              </div>
+
+              <div class="info-box bg-emerald">
+                <h4 style="font-weight:600;margin-bottom:0.5rem">📍 Absolute ($A$1)</h4>
+                <p style="font-size:0.875rem">Stays fixed when copied.</p>
+                <div style="background:#1e293b;color:#10b981;padding:0.5rem;border-radius:0.25rem;margin-top:0.5rem;font-family:monospace;font-size:0.75rem">=B2 * $D$1</div>
+              </div>
+            </div>
+
+            <div style="background:#f0f9ff;padding:1rem;border-radius:0.5rem;margin-top:1rem;border-left:3px solid #0284c7">
+              <p style="font-size:0.875rem;color:#0c4a6e"><strong>💡 Tip:</strong> Use <code>$</code> to lock row/column. Example: <code>$A$1</code> always uses cell A1 even when copied down.</p>
+            </div>
+          </div>
+
+          <!-- Functions -->
+          <div style="margin-bottom:1.5rem">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;color:#4f46e5">➕ Useful Functions</h3>
+            
+            <div class="info-box bg-purple">
+              <h4 style="font-weight:600;margin-bottom:0.75rem">Essential Functions</h4>
+              <ul style="font-size:0.875rem">
+                <li><strong>MIN(range)</strong> – smallest value</li>
+                <li><strong>MAX(range)</strong> – largest value</li>
+                <li><strong>COUNT(range)</strong> – count numbers</li>
+                <li><strong>COUNTA(range)</strong> – count non-empty cells</li>
+                <li><strong>COUNTIF(range, criteria)</strong> – count cells that meet a condition</li>
+                <li><strong>IF(condition, value_if_true, value_if_false)</strong> – decision making</li>
+              </ul>
+            </div>
+
+            <div style="background:#f8fafc;padding:1rem;border-radius:0.5rem;margin-top:1rem;border-left:3px solid #7c3aed">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">📘 Example: IF Function</h4>
+              <div style="background:#1e293b;color:#10b981;padding:0.75rem;border-radius:0.25rem;font-family:monospace;font-size:0.875rem">=IF(E2 >= 12, "Pass", "Fail")</div>
+              <p style="margin-top:0.5rem;font-size:0.875rem;color:#64748b">This checks if score in E2 is 12 or higher, returns "Pass", otherwise "Fail".</p>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div style="margin-bottom:1.5rem">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:0.75rem;color:#4f46e5">📊 Chart Creation</h3>
+            <p style="margin-bottom:1rem">Charts help visualize student performance or any data trend.</p>
+            
+            <div class="info-box bg-pink">
+              <h4 style="font-weight:600;margin-bottom:0.5rem">✨ Steps to Create a Chart</h4>
+              <ol style="font-size:0.875rem;padding-left:1.25rem">
+                <li>Select data (e.g., names + scores)</li>
+                <li>Insert → Chart</li>
+                <li>Choose Column, Pie, or Line chart</li>
+                <li>Add titles and labels</li>
+              </ol>
+            </div>
+
+            <div class="alert-box" style="margin-top:1rem">
+              <p><strong>📌 Practice:</strong> Create a column chart showing students and their average scores.</p>
+            </div>
+          </div>
+
+          <!-- Comprehensive Lab -->
+          <div style="background:linear-gradient(135deg,#ede9fe 0%,#ddd6fe 100%);padding:1.5rem;border-radius:1rem;border:2px solid #7c3aed">
+            <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#5b21b6">🧪 Comprehensive Lab Exercise</h3>
+            
+            <p style="margin-bottom:1rem;font-weight:600">Use the table below to complete all tasks:</p>
+            
+            <div style="overflow-x:auto;margin-bottom:1rem">
+              <table style="font-size:0.875rem">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Assignment</th>
+                    <th>Midterm</th>
+                    <th>Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Yasmine</td><td>12</td><td>14</td><td>16</td></tr>
+                  <tr><td>Ahmed</td><td>10</td><td>11</td><td>13</td></tr>
+                  <tr><td>Lina</td><td>15</td><td>16</td><td>18</td></tr>
+                  <tr><td>Samir</td><td>8</td><td>10</td><td>12</td></tr>
+                  <tr><td>Doha</td><td>14</td><td>15</td><td>17</td></tr>
+                  <tr><td>Karim</td><td>9</td><td>13</td><td>10</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="background:white;padding:1rem;border-radius:0.5rem">
+              <h4 style="font-weight:600;margin-bottom:0.75rem;color:#5b21b6">📌 Tasks to Complete</h4>
+              <ol style="font-size:0.875rem;line-height:1.8">
+                <li>Format header row (bold, center, background color)</li>
+                <li>Convert the range to a table</li>
+                <li>Add an <strong>Average</strong> column → <code>=AVERAGE(B2:D2)</code></li>
+                <li>Add a <strong>Result</strong> column (Pass/Fail using IF)</li>
+                <li>Highlight averages ≥ 15 in gold</li>
+                <li>Highlight Final &lt; 12 in red</li>
+                <li>Sort by Average (Largest → Smallest)</li>
+                <li>Filter only "Fail" students</li>
+                <li>In cell G1 enter: <strong>1.05 (Bonus)</strong></li>
+                <li>Create <strong>Bonus Avg</strong>: <code>=E2 * $G$1</code></li>
+                <li>Find MIN, MAX, COUNTIF, and AVERAGE below the table</li>
+                <li>Create a chart with student averages</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div class="info-box bg-blue" style="margin-top:1.5rem">
+            <h4 style="font-weight:600;margin-bottom:0.5rem">📝 Summary</h4>
+            <p style="font-size:0.875rem">You've learned how to organize, analyze, visualize, and enhance data in Excel using intermediate skills. These techniques are essential for data analysis and reporting in professional environments.</p>
+          </div>
+
+        </div>
+      </section>
+
       <!-- Formula Tester -->
       <section id="tester" class="section-card border-teal" style="background:linear-gradient(135deg,#ccfbf1 0%,#99f6e4 100%)">
         <div class="section-header">
@@ -946,6 +1511,8 @@ const navItems = [
   { id: 'data', label: 'Data Management', icon: '💾' },
   { id: 'formatting', label: 'Formatting', icon: '🎨' },
   { id: 'formulas', label: 'Formulas', icon: '🧮' },
+  { id: 'intermediate', label: 'Intermediate Skills', icon: '⭐' },
+  { id: 'exercises', label: 'Practice Exercises', icon: '✏️' },
   { id: 'lab', label: 'Practical Lab', icon: '💡' },
   { id: 'tester', label: 'Formula Tester', icon: '🔢' },
   { id: 'resources', label: 'Resources', icon: '📖' }
